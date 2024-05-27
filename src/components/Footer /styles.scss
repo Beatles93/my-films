@@ -1,0 +1,26 @@
+.footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #333;
+    padding:10px 20px;
+}
+
+/* styles.css */
+.instagram-btn {
+    display: inline-block;
+    width: 60px;
+    /* Размер кнопки */
+    height: 30px;
+    background-image: url('instagram-icon.png');
+    /* Замените 'instagram-icon.png' на путь к вашему изображению кнопки */
+    background-size: cover;
+    background-color: transparent;
+    /* Чтобы удалить фоновый цвет кнопки */
+    color: #fff;
+        text-decoration: none;
+        font-size: 18px;
+        padding: 10px 15px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+}

@@ -1,0 +1,9 @@
+.star-rating {
+    color: #ffbf00;
+    display: flex;
+}
+
+.star-rating .fas,
+.star-rating .far {
+    margin-right: 2px;
+}
