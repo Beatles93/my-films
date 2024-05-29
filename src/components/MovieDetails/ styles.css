@@ -90,3 +90,18 @@
     font-size: 1.4em;
   }
 }
+.back-button {
+  margin-top: 20px;
+  padding: 10px 15px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #5398cd;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #608bb6;
+}

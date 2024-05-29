@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import StarRating from "../StarRating/StarRating"; // Import the StarRating component
 import "./ styles.css";
 
 function MovieDetails() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [movieDetails, setMovieDetails] = useState(null);
 
   useEffect(() => {
@@ -39,6 +40,9 @@ function MovieDetails() {
           <i className="fas fa-eye"></i> {movieDetails.vote_count}
         </span>
       </div>
+      <button className="back-button" onClick={() => navigate(-1)}>
+        Back to Films
+      </button>
     </div>
   );
 }
