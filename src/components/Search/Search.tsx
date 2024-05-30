@@ -18,7 +18,6 @@ const Search = ({ onSearch }) => {
         value={inputValue}
         onChange={handleInputChange}
       />
-      {/* You can add a button here if needed */}
     </div>
   );
 };
