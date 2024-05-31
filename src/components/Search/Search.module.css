@@ -1,16 +1,16 @@
-.center-container {
+.centerContainer {
     flex-grow: 1;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.search-container {
+.searchContainer {
     display: flex;
     align-items: center;
 }
 
-.search-input {
+.searchInput {
     border: none;
     outline: none;
     padding: 8px 12px;

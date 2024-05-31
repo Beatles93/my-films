@@ -1,12 +1,12 @@
-import "./styles.css";
+import styles from './Home.module.css';
 
 const Home = () => {
   return (
-    <div className="home">
-      <header className="app-header">
-        <div className="img-body">
+    <div className={styles.home}>
+      <header className={styles.appHeader}>
+        <div className={styles.imgBody}>
           <img
-            className="img-header"
+            className={styles.imgHeader}
             src="./public/images/bodyHome.jpg"
             alt="body"
           />

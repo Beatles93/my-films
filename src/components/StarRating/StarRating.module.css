@@ -1,9 +1,9 @@
-.star-rating {
+.starRating {
     color: #ffbf00;
     display: flex;
 }
 
-.star-rating .fas,
-.star-rating .far {
+.starRating .fas,
+.starRating .far {
     margin-right: 2px;
 }
