@@ -6,12 +6,13 @@ import Serials from "./pages/Serials/Serials";
 import Header from "./components/Header/Header";
 import MovieDetails from "./components/MovieDetails/MovieDetails";
 import Footer from "./components/Footer /Footer";
+import styles from './App.module.css'
 
 function App() {
   const [query, setQuery] = useState("");
 
   return (
-    <div className="app">
+    <div className={styles.app}>
       <BrowserRouter>
         <Header setQuery={setQuery} />
         <Routes>

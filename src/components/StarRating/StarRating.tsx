@@ -1,4 +1,4 @@
-import './styles.css'
+import styles from './StarRating.module.css'
 
 const StarRating = ({ rating }) => {
   const fullStars = Math.floor(rating);
@@ -6,7 +6,7 @@ const StarRating = ({ rating }) => {
   const emptyStars = 5 - Math.ceil(rating);
 
   return (
-    <div className="star-rating">
+    <div className={styles.starRating}>
       {[...Array(fullStars)].map((_, index) => (
         <i key={index} className="fas fa-star"></i>
       ))}

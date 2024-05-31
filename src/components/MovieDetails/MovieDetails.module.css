@@ -1,4 +1,4 @@
-.movie-details {
+.movieDetails {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,27 +10,27 @@
   margin: 0 auto;
 }
 
-.movie-poster {
+.moviePoster {
   width: 100%;
   max-width: 300px;
   border-radius: 10px;
   transition: transform 0.3s;
 }
 
-.movie-poster:hover {
+.moviePoster:hover {
   transform: scale(1.05);
 }
 
-.movie-title {
+.movieTitle {
   font-size: 1.5em;
   margin-bottom: 5px;
   text-align: center;
   color: #333;
 }
 
-.movie-release-date,
-.movie-overview,
-.movie-votes {
+.movieReleaseDate,
+.movieOverview,
+.movieVotes {
   font-size: 1em;
   margin-bottom: 5px;
   text-align: center;
@@ -38,7 +38,7 @@
   color: #555;
 }
 
-.movie-votes {
+.movieVotes {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,7 +48,7 @@
   color: #ffbf00;
 }
 
-.vote-count {
+.voteCount {
   margin-left: 5px;
   color: #666;
 }
@@ -59,38 +59,38 @@
 
 /* Tablets: 768px and above */
 @media (min-width: 768px) {
-  .movie-poster {
+  .moviePoster {
     /* max-width: 300px; */
   }
 
-  .movie-title {
+  .movieTitle {
     font-size: 1.8em;
   }
 
-  .movie-release-date,
-  .movie-overview,
-  .movie-votes {
+  .movieReleaseDate,
+  .movieOverview,
+  .movieVotes {
     font-size: 1.2em;
   }
 }
 
 /* Netbooks: 1024px and above */
 @media (min-width: 1024px) {
-  .movie-poster {
+  .moviePoster {
     /* max-width: 350px; */
   }
 
-  .movie-title {
+  .movieTitle {
     font-size: 2em;
   }
 
-  .movie-release-date,
-  .movie-overview,
-  .movie-votes {
+  .movieReleaseDate,
+  .movieOverview,
+  .movieVotes {
     font-size: 1.4em;
   }
 }
-.back-button {
+.backButton {
   margin-top: 20px;
   padding: 10px 15px;
   font-size: 16px;
@@ -102,6 +102,6 @@
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.back-button:hover {
+.backButton:hover {
   background-color: #608bb6;
 }

@@ -1,12 +1,12 @@
-import "./styles.css";
+import styles from './Serials.module.css';
 
 
 const Serials = () => {
   return (
-    <div className="serials">
-      <div className="img-body">
+    <div className={styles.serials}>
+      <div className={styles.imgBody}>
         <img
-          className="img-header"
+          className={styles.imgHeader}
           src="./public/images/bodySeries.jpg"
           alt="body"
         />

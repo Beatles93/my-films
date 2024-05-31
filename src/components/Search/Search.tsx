@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./styles.css";
+import styles from "./Search.module.css";
 
 const Search = ({ onSearch }) => {
   const [inputValue, setInputValue] = useState("");
@@ -10,10 +10,10 @@ const Search = ({ onSearch }) => {
   };
 
   return (
-    <div className="search">
+    <div className={styles.searchContainer}>
       <input
         type="text"
-        className="search-input"
+        className={styles.searchInput}
         placeholder="Search for movies..."
         value={inputValue}
         onChange={handleInputChange}

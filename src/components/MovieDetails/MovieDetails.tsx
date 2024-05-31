@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import StarRating from "../StarRating/StarRating"; // Import the StarRating component
-import "./ styles.css";
+import styles from './MovieDetails.module.css';
 
 function MovieDetails() {
   const { id } = useParams();
@@ -22,25 +22,25 @@ function MovieDetails() {
   }
 
   return (
-    <div className="movie-details">
+    <div className={styles.movieDetails}>
       <img
         src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
         alt={movieDetails.title}
-        className="movie-poster"
+        className={styles.moviePoster}
       />
-      <h2 className="movie-title">{movieDetails.title}</h2>
-      <p className="movie-release-date">
+      <h2 className={styles.movieTitle}>{movieDetails.title}</h2>
+      <p className={styles.movieReleaseDate}>
         Release Date: {movieDetails.release_date}
       </p>
-      <p className="movie-overview">{movieDetails.overview}</p>
-      <div className="movie-votes">
+      <p className={styles.movieOverview}>{movieDetails.overview}</p>
+      <div className={styles.movieVotes}>
         <StarRating rating={movieDetails.vote_average / 2} />{" "}
         {/* Pass half the vote_average */}
-        <span className="vote-count">
-          <i className="fas fa-eye"></i> {movieDetails.vote_count}
+        <span className={styles.voteCount}>
+          <i className={styles.fas}></i> {movieDetails.vote_count}
         </span>
       </div>
-      <button className="back-button" onClick={() => navigate(-1)}>
+      <button className={styles.backButton} onClick={() => navigate(-1)}>
         Back to Films
       </button>
     </div>

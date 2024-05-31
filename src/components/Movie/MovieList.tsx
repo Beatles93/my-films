@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./styles.css";
+import styles from './MovieList.module.css';
 import { useNavigate } from "react-router-dom";
 
 function MovieList({ query }) {
@@ -40,17 +40,17 @@ function MovieList({ query }) {
   });
 
   return (
-    <div className="movie-container">
+    <div className={styles.movieContainer}>
       {filteredMovies.map((movie) => (
         <div
           key={movie.id}
-          className="movie-item"
+          className={styles.movieItem}
           onClick={() => handleClick(movie.id)}
         >
           <img
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
             alt={movie.title}
-            className="movie-poster"
+            className={styles.moviePoster}
           />
         </div>
       ))}

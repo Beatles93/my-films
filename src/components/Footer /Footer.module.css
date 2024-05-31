@@ -1,4 +1,4 @@
-.footer-content {
+.footerContent {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -6,13 +6,13 @@
   padding: 10px 20px;
 }
 
-.social-links {
+.socialLinks {
   display: flex;
   gap: 10px;
   margin-left: auto;
 }
 
-.social-btn {
+.socialBtn {
   display: inline-block;
   background-color: transparent;
   color: #fff;
@@ -23,12 +23,12 @@
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.social-icon {
+.socialIcon {
   width: 30px;
   height: 30px;
 }
 
-.social-btn:hover {
+.socialBtn:hover {
   background-color: rgba(255, 255, 255, 0.1);
   color: #fff;
 }
