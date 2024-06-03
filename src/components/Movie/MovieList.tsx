@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./MovieList.module.scss";
 import { useNavigate } from "react-router-dom";
-import loaderSvg from "../../assets/loader.svg"; // Укажите правильный путь к SVG
+import loaderSvg from "../../assets/loader.svg"; 
 
 function MovieList({ query }) {
   const [movieList, setMovieList] = useState([]);
@@ -12,7 +12,7 @@ function MovieList({ query }) {
     navigate(`/movie/${id}`);
   };
 
-  const getMovie = () => {
+  const getMovie = (query) => {
     const options = {
       method: "GET",
       headers: {
@@ -21,10 +21,12 @@ function MovieList({ query }) {
           "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMWE4NzE1ZjNkMjAyODIxMDNhNDQ5NmVlMGY5YWM0ZCIsInN1YiI6IjY2M2Y3YWY0YWNmNDk4YWYzMGMxOWM4ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mf2xIlXEIZpUKLT_VRMBqk-kJQxFztvQqq5kQVdjGIg",
       },
     };
-    fetch(
-      "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc",
-      options
-    )
+    const url =query
+      ? `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`
+      : "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc";
+     
+    setLoading(true);
+    fetch(url, options)
       .then((res) => res.json())
       .then((json) => {
         setMovieList(json.results);
@@ -37,16 +39,8 @@ function MovieList({ query }) {
   };
 
   useEffect(() => {
-    getMovie();
-  }, []);
-
-  const filteredMovies = movieList.filter((movie) => {
-    if (!movie.title) {
-      console.warn("Movie without title found:", movie);
-      return false;
-    }
-    return movie.title.toLowerCase().includes(query.toLowerCase());
-  });
+    getMovie(query);
+  }, [query]);
 
   return (
     <div>
@@ -56,7 +50,7 @@ function MovieList({ query }) {
         </div>
       ) : (
         <div className={styles.movieContainer}>
-          {filteredMovies.map((movie) => (
+          {movieList.map((movie) => (
             <div
               key={movie.id}
               className={styles.movieItem}
