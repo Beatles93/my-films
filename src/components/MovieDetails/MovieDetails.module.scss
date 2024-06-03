@@ -56,6 +56,19 @@
 .fas {
     margin-right: 3px;
 }
+.loaderContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.loader {
+    width: 100px;
+    height: 100px;
+    
+}
+
 
 /* Tablets: 768px and above */
 @media (min-width: 768px) {
