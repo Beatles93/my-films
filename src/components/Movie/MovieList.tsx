@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from './MovieList.module.css';
+import styles from './MovieList.module.scss';
 import { useNavigate } from "react-router-dom";
 
 function MovieList({ query }) {

@@ -6,7 +6,7 @@ import Serials from "./pages/Serials/Serials";
 import Header from "./components/Header/Header";
 import MovieDetails from "./components/MovieDetails/MovieDetails";
 import Footer from "./components/Footer /Footer";
-import styles from './App.module.css'
+import styles from './App.module.scss'
 
 function App() {
   const [query, setQuery] = useState("");

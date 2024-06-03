@@ -1,4 +1,4 @@
-import styles from './StarRating.module.css'
+import styles from './StarRating.module.scss'
 
 const StarRating = ({ rating }) => {
   const fullStars = Math.floor(rating);

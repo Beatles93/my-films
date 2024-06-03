@@ -1,4 +1,4 @@
-import styles from './Serials.module.css';
+import styles from './Serials.module.scss';
 
 
 const Serials = () => {
