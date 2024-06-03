@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
-import styles from './Header.module.css';
+import styles from './Header.module.scss';
 import Navbar from "../Navbar/Navbar";
-import searchStyles from '../Search/Search.module.css'
+import searchStyles from '../Search/Search.module.scss'
 
 const Header = ({ setQuery }) => {
   const location = useLocation();

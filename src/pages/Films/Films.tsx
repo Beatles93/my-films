@@ -1,5 +1,5 @@
 import MovieList from "../../components/Movie/MovieList";
-import styles from './Films.module.css'
+import styles from './Films.module.scss'
 
 const Films = ({ query }) => {
   return (

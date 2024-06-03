@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import StarRating from "../StarRating/StarRating"; // Import the StarRating component
-import styles from './MovieDetails.module.css';
+import StarRating from "../StarRating/StarRating";
+import styles from './MovieDetails.module.scss';
 
 function MovieDetails() {
   const { id } = useParams();
