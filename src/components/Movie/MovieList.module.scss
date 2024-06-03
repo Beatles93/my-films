@@ -31,6 +31,20 @@
   border-radius: 12px;
 }
 
+.loaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.loader {
+  width: 100px;
+  /* Adjust size as needed */
+  height: 100px;
+  /* Adjust size as needed */
+}
+
 /* Медиазапросы для списков фильмов */
 
 /* Tablets: 768px and above */

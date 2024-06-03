@@ -1,24 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import StarRating from "../StarRating/StarRating";
-import styles from './MovieDetails.module.scss';
+import styles from "./MovieDetails.module.scss";
+import loaderSvg from "../../assets/loader.svg"; // Укажите правильный путь к SVG
 
 function MovieDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [movieDetails, setMovieDetails] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch(
       `https://api.themoviedb.org/3/movie/${id}?api_key=a1a8715f3d20282103a4496ee0f9ac4d`
     )
       .then((res) => res.json())
-      .then((data) => setMovieDetails(data))
-      .catch((error) => console.error("Error fetching movie details:", error));
+      .then((data) => {
+        setMovieDetails(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching movie details:", error);
+        setLoading(false);
+      });
   }, [id]);
 
-  if (!movieDetails) {
-    return <div>Loading...</div>;
+  if (loading) {
+    return (
+      <div className={styles.loaderContainer}>
+        <img src={loaderSvg} alt="Loading..." className={styles.loader} />
+      </div>
+    );
   }
 
   return (
@@ -35,7 +47,6 @@ function MovieDetails() {
       <p className={styles.movieOverview}>{movieDetails.overview}</p>
       <div className={styles.movieVotes}>
         <StarRating rating={movieDetails.vote_average / 2} />{" "}
-        {/* Pass half the vote_average */}
         <span className={styles.voteCount}>
           <i className={styles.fas}></i> {movieDetails.vote_count}
         </span>

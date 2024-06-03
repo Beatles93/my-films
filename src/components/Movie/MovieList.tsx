@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import styles from './MovieList.module.scss';
+import styles from "./MovieList.module.scss";
 import { useNavigate } from "react-router-dom";
+import loaderSvg from "../../assets/loader.svg"; // Укажите правильный путь к SVG
 
 function MovieList({ query }) {
   const [movieList, setMovieList] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   const handleClick = (id) => {
@@ -24,7 +26,14 @@ function MovieList({ query }) {
       options
     )
       .then((res) => res.json())
-      .then((json) => setMovieList(json.results));
+      .then((json) => {
+        setMovieList(json.results);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching movies:", error);
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -40,20 +49,28 @@ function MovieList({ query }) {
   });
 
   return (
-    <div className={styles.movieContainer}>
-      {filteredMovies.map((movie) => (
-        <div
-          key={movie.id}
-          className={styles.movieItem}
-          onClick={() => handleClick(movie.id)}
-        >
-          <img
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-            alt={movie.title}
-            className={styles.moviePoster}
-          />
+    <div>
+      {loading ? (
+        <div className={styles.loaderContainer}>
+          <img src={loaderSvg} alt="Loading..." className={styles.loader} />
         </div>
-      ))}
+      ) : (
+        <div className={styles.movieContainer}>
+          {filteredMovies.map((movie) => (
+            <div
+              key={movie.id}
+              className={styles.movieItem}
+              onClick={() => handleClick(movie.id)}
+            >
+              <img
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                alt={movie.title}
+                className={styles.moviePoster}
+              />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

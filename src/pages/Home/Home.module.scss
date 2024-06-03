@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 .appHeader {
     width: 100%;
     height: 100%;
@@ -13,5 +14,16 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Растягиваем изображение до заполнения контейнера */
+}
+
+.loaderContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.loader {
+    width: 100px;
+    height: 100px;
 }
