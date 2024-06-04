@@ -69,6 +69,21 @@
     
 }
 
+.backButton {
+    margin-top: 20px;
+    padding: 10px 15px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #5398cd;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.backButton:hover {
+    background-color: #608bb6;
+}
 
 /* Tablets: 768px and above */
 @media (min-width: 768px) {
@@ -104,18 +119,3 @@
     }
 }
 
-.backButton {
-    margin-top: 20px;
-    padding: 10px 15px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #5398cd;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.backButton:hover {
-    background-color: #608bb6;
-}

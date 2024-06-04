@@ -40,12 +40,31 @@
 
 .loader {
   width: 100px;
-  /* Adjust size as needed */
   height: 100px;
-  /* Adjust size as needed */
 }
 
-/* Медиазапросы для списков фильмов */
+.loadMoreContainer {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.loadMoreButton {
+  background-color: #5398cd;
+  color: #fff;
+  margin-top: 20px;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.loadMoreButton:hover {
+  background-color: #608bb6;
+}
+
 
 /* Tablets: 768px and above */
 @media (min-width: 768px) {
