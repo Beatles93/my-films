@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
 import styles from "./MovieList.module.scss";
 import { useNavigate } from "react-router-dom";
-import loaderSvg from "../../assets/loader.svg"; 
+import loaderSvg from "../../assets/loader.svg";
 
 function MovieList({ query }) {
   const [movieList, setMovieList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const navigate = useNavigate();
 
   const handleClick = (id) => {
     navigate(`/movie/${id}`);
   };
 
-  const getMovie = (query) => {
+  const getMovie = (query, page = 1) => {
     const options = {
       method: "GET",
       headers: {
@@ -21,15 +23,20 @@ function MovieList({ query }) {
           "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMWE4NzE1ZjNkMjAyODIxMDNhNDQ5NmVlMGY5YWM0ZCIsInN1YiI6IjY2M2Y3YWY0YWNmNDk4YWYzMGMxOWM4ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mf2xIlXEIZpUKLT_VRMBqk-kJQxFztvQqq5kQVdjGIg",
       },
     };
-    const url =query
-      ? `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`
-      : "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc";
-     
+    const url = query
+      ? `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=${page}`
+      : `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc`;
+
     setLoading(true);
     fetch(url, options)
       .then((res) => res.json())
       .then((json) => {
-        setMovieList(json.results);
+        if (page > 1) {
+          setMovieList((prev) => [...prev, ...json.results]);
+        } else {
+          setMovieList(json.results);
+        }
+        setTotalPages(json.total_pages);
         setLoading(false);
       })
       .catch((error) => {
@@ -38,13 +45,22 @@ function MovieList({ query }) {
       });
   };
 
+  const loadMoreMovies = () => {
+    if (currentPage < totalPages) {
+      const nextPage = currentPage + 1;
+      setCurrentPage(nextPage);
+      getMovie(query, nextPage);
+    }
+  };
+
   useEffect(() => {
+    setCurrentPage(1);
     getMovie(query);
   }, [query]);
 
   return (
     <div>
-      {loading ? (
+      {loading && currentPage === 1 ? (
         <div className={styles.loaderContainer}>
           <img src={loaderSvg} alt="Loading..." className={styles.loader} />
         </div>
@@ -63,6 +79,13 @@ function MovieList({ query }) {
               />
             </div>
           ))}
+        </div>
+      )}
+      {!loading && currentPage < totalPages && (
+        <div className={styles.loadMoreContainer}>
+          <button className={styles.loadMoreButton} onClick={loadMoreMovies}>
+            Load More
+          </button>
         </div>
       )}
     </div>
