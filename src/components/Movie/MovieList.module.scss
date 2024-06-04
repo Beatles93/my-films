@@ -43,30 +43,39 @@
   height: 100px;
 }
 
-.loadMoreContainer {
+.paginationContainer {
   display: flex;
   justify-content: center;
   padding: 20px;
+  gap: 5px;
 }
 
-.loadMoreButton {
+.paginationContainer button,
+.paginationContainer span {
   background-color: #5398cd;
   color: #fff;
-  margin-top: 20px;
-  padding: 10px 15px;
-  font-size: 16px;
   border: none;
+  padding: 10px 15px;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
-.loadMoreButton:hover {
+.paginationContainer button:hover {
   background-color: #608bb6;
 }
 
+.paginationContainer span {
+  background-color: transparent;
+  color: #000;
+  cursor: default;
+}
 
-/* Tablets: 768px and above */
+.activePage {
+  background-color: #5398cd !important;
+}
+
+/* Media queries for responsive layout */
 @media (min-width: 768px) {
   .movieItem {
     flex: 1 1 calc(33.33% - 40px);
@@ -74,7 +83,6 @@
   }
 }
 
-/* Netbooks: 1024px and above */
 @media (min-width: 1024px) {
   .movieItem {
     flex: 1 1 calc(25% - 40px);
@@ -82,7 +90,6 @@
   }
 }
 
-/* Monitors: 1280px and above */
 @media (min-width: 1280px) {
   .movieItem {
     flex: 1 1 calc(20% - 40px);
@@ -90,7 +97,6 @@
   }
 }
 
-/* Larger Monitors: 1600px and above */
 @media (min-width: 1600px) {
   .movieItem {
     flex: 1 1 calc(16.66% - 40px);
@@ -98,7 +104,6 @@
   }
 }
 
-/* Ultra-wide Monitors: 1920px and above */
 @media (min-width: 1920px) {
   .movieItem {
     flex: 1 1 calc(16.66% - 40px);

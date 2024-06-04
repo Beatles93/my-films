@@ -31,11 +31,7 @@ function MovieList({ query }) {
     fetch(url, options)
       .then((res) => res.json())
       .then((json) => {
-        if (page > 1) {
-          setMovieList((prev) => [...prev, ...json.results]);
-        } else {
-          setMovieList(json.results);
-        }
+        setMovieList(json.results);
         setTotalPages(json.total_pages);
         setLoading(false);
       })
@@ -45,11 +41,10 @@ function MovieList({ query }) {
       });
   };
 
-  const loadMoreMovies = () => {
-    if (currentPage < totalPages) {
-      const nextPage = currentPage + 1;
-      setCurrentPage(nextPage);
-      getMovie(query, nextPage);
+  const handlePageChange = (page) => {
+    if (page > 0 && page <= totalPages) {
+      setCurrentPage(page);
+      getMovie(query, page);
     }
   };
 
@@ -57,6 +52,48 @@ function MovieList({ query }) {
     setCurrentPage(1);
     getMovie(query);
   }, [query]);
+
+  const renderPageButtons = () => {
+    let pageButtons = [];
+
+    if (currentPage > 1) {
+      pageButtons.push(
+        <button key="prev" onClick={() => handlePageChange(currentPage - 1)}>
+          Earlier
+        </button>
+      );
+    }
+
+    for (let page = 1; page <= totalPages; page++) {
+      if (
+        page === 1 ||
+        page === totalPages ||
+        (page >= currentPage - 2 && page <= currentPage + 2)
+      ) {
+        pageButtons.push(
+          <button
+            key={page}
+            onClick={() => handlePageChange(page)}
+            className={currentPage === page ? styles.activePage : ""}
+          >
+            {page}
+          </button>
+        );
+      } else if (page === currentPage - 3 || page === currentPage + 3) {
+        pageButtons.push(<span key={page}>...</span>);
+      }
+    }
+
+    if (currentPage < totalPages) {
+      pageButtons.push(
+        <button key="next" onClick={() => handlePageChange(currentPage + 1)}>
+          Later
+        </button>
+      );
+    }
+
+    return pageButtons;
+  };
 
   return (
     <div>
@@ -81,12 +118,8 @@ function MovieList({ query }) {
           ))}
         </div>
       )}
-      {!loading && currentPage < totalPages && (
-        <div className={styles.loadMoreContainer}>
-          <button className={styles.loadMoreButton} onClick={loadMoreMovies}>
-            Load More
-          </button>
-        </div>
+      {!loading && totalPages > 1 && (
+        <div className={styles.paginationContainer}>{renderPageButtons()}</div>
       )}
     </div>
   );
