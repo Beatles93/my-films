@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./GenreSidebar.module.scss";
+import closeIcon from "../../assets/cross-icon.png"; 
 
-function GenreSidebar({ onSelectGenre }) {
+function GenreSidebar({ onSelectGenre, onClose }) {
   const [genres, setGenres] = useState([]);
 
   useEffect(() => {
@@ -23,7 +24,12 @@ function GenreSidebar({ onSelectGenre }) {
   return (
     <div className={styles.genreSidebar}>
       <div className={styles.logo}>My films</div>
-      <h3 className={styles.h3}>Genres</h3>
+      <div className={styles.header}>
+        <h3 className={styles.h3}>Genres</h3>
+        <button className={styles.closeButton} onClick={onClose}>
+          <img src={closeIcon} alt="Close" />
+        </button>
+      </div>
       <ul>
         {genres.map((genre) => (
           <li key={genre.id} onClick={() => onSelectGenre(genre.id)}>

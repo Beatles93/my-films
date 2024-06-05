@@ -1,3 +1,12 @@
+.toggleIcon {
+  position: fixed;
+  top: 100px;
+  left: 5px;
+  width: 40px; 
+  height: 40px;
+  cursor: pointer;
+  z-index: 1000;
+}
 .movieContainer {
   display: flex;
   flex-wrap: wrap;
