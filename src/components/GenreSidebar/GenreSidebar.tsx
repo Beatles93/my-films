@@ -22,7 +22,8 @@ function GenreSidebar({ onSelectGenre }) {
 
   return (
     <div className={styles.genreSidebar}>
-      <h3>Genres</h3>
+      <div className={styles.logo}>My films</div>
+      <h3 className={styles.h3}>Genres</h3>
       <ul>
         {genres.map((genre) => (
           <li key={genre.id} onClick={() => onSelectGenre(genre.id)}>

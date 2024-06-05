@@ -6,22 +6,32 @@
     width: 250px;
     background-color: #f0f0f0;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    padding: 20px;
     overflow-y: auto;
     z-index: 1000;
 }
-
-.genreSidebar h3 {
+.logo {
+    background-color: #608bb6;
+    color: white;
+    padding: 30px 20px;
+    text-align: start;
+    font-size: 1.5em;
+    font-weight: bold;
     margin-bottom: 20px;
+}
+.h3{
+padding: 5px 20px;
+}
+.genreSidebar h3 {
+    margin-top: 20px;
 }
 
 .genreSidebar ul {
     list-style: none;
-    padding: 0;
+    padding: 5px 15px;
 }
 
 .genreSidebar li {
-    padding: 10px 0;
+    padding: 8px 10px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
