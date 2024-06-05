@@ -1,0 +1,35 @@
+.genreSidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 250px;
+    background-color: #f0f0f0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.genreSidebar h3 {
+    margin-bottom: 20px;
+}
+
+.genreSidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.genreSidebar li {
+    padding: 10px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.genreSidebar li:hover {
+    background-color: #e0e0e0;
+}
+
+.genreSidebar li:active {
+    background-color: #c0c0c0;
+}
