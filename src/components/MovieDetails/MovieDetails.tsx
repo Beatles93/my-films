@@ -1,13 +1,26 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import StarRating from "../StarRating/StarRating";
 import styles from "./MovieDetails.module.scss";
-import loaderSvg from "../../assets/loader.svg"; // Укажите правильный путь к SVG
+import loaderSvg from "../../assets/loader.svg";
 
-function MovieDetails() {
-  const { id } = useParams();
+interface MovieDetails {
+  id: string;
+}
+
+interface Movie {
+  poster_path: string;
+  title: string;
+  release_date: string;
+  overview: string;
+  vote_average: number;
+  vote_count: number;
+}
+
+const MovieDetails: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [movieDetails, setMovieDetails] = useState(null);
+  const [movieDetails, setMovieDetails] = useState<Movie | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -15,7 +28,7 @@ function MovieDetails() {
       `https://api.themoviedb.org/3/movie/${id}?api_key=a1a8715f3d20282103a4496ee0f9ac4d`
     )
       .then((res) => res.json())
-      .then((data) => {
+      .then((data: Movie) => {
         setMovieDetails(data);
         setLoading(false);
       })
@@ -31,6 +44,10 @@ function MovieDetails() {
         <img src={loaderSvg} alt="Loading..." className={styles.loader} />
       </div>
     );
+  }
+
+  if (!movieDetails) {
+    return <div>Error loading movie details</div>;
   }
 
   return (
@@ -56,6 +73,6 @@ function MovieDetails() {
       </button>
     </div>
   );
-}
+};
 
 export default MovieDetails;
