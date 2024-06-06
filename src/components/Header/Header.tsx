@@ -1,12 +1,16 @@
 import { useLocation } from "react-router-dom";
-import styles from './Header.module.scss';
+import styles from "./Header.module.scss";
 import Navbar from "../Navbar/Navbar";
-import searchStyles from '../Search/Search.module.scss'
+import searchStyles from "../Search/Search.module.scss";
 
-const Header = ({ setQuery }) => {
+interface HeaderProps {
+  setQuery: (query: string) => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ setQuery }) => {
   const location = useLocation();
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
   };
 

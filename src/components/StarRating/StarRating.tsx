@@ -1,6 +1,11 @@
-import styles from './StarRating.module.scss'
+import React from "react";
+import styles from "./StarRating.module.scss";
 
-const StarRating = ({ rating }) => {
+interface StarRatingProps {
+  rating: number;
+}
+
+const StarRating: React.FC<StarRatingProps> = ({ rating }) => {
   const fullStars = Math.floor(rating);
   const halfStar = rating % 1 !== 0;
   const emptyStars = 5 - Math.ceil(rating);

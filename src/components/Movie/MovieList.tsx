@@ -3,22 +3,32 @@ import styles from "./MovieList.module.scss";
 import GenreSidebar from "../GenreSidebar/GenreSidebar";
 import { useNavigate } from "react-router-dom";
 import loaderSvg from "../../assets/loader.svg";
-import toggleIcon from "../../assets/button-icon.png"; 
+import toggleIcon from "../../assets/button-icon.png";
 
-function MovieList({ query }) {
-  const [movieList, setMovieList] = useState([]);
+interface MovieListProps {
+  query: string;
+}
+
+interface Movie {
+  id: number;
+  title: string;
+  poster_path: string;
+}
+
+const MovieList: React.FC<MovieListProps> = ({ query }) => {
+  const [movieList, setMovieList] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [selectedGenre, setSelectedGenre] = useState(null);
+  const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
   const [showGenres, setShowGenres] = useState(false);
   const navigate = useNavigate();
 
-  const handleClick = (id) => {
+  const handleClick = (id: number) => {
     navigate(`/movie/${id}`);
   };
 
-  const getMovie = (query, page = 1) => {
+  const getMovie = (query: string, page = 1) => {
     const options = {
       method: "GET",
       headers: {
@@ -51,14 +61,14 @@ function MovieList({ query }) {
       });
   };
 
-  const handlePageChange = (page) => {
+  const handlePageChange = (page: number) => {
     if (page > 0 && page <= totalPages) {
       setCurrentPage(page);
       getMovie(query, page);
     }
   };
 
-  const handleSelectGenre = (genreId) => {
+  const handleSelectGenre = (genreId: number) => {
     setSelectedGenre(genreId);
     setCurrentPage(1);
     getMovie(query, 1);
@@ -119,7 +129,12 @@ function MovieList({ query }) {
         className={styles.toggleIcon}
         onClick={() => setShowGenres(!showGenres)}
       />
-      {showGenres && <GenreSidebar onSelectGenre={handleSelectGenre} onClose={() => setShowGenres(false)} />}
+      {showGenres && (
+        <GenreSidebar
+          onSelectGenre={handleSelectGenre}
+          onClose={() => setShowGenres(false)}
+        />
+      )}
       {loading && currentPage === 1 ? (
         <div className={styles.loaderContainer}>
           <img src={loaderSvg} alt="Loading..." className={styles.loader} />
@@ -146,6 +161,6 @@ function MovieList({ query }) {
       )}
     </div>
   );
-}
+};
 
 export default MovieList;

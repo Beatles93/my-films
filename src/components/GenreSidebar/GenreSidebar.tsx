@@ -1,9 +1,22 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./GenreSidebar.module.scss";
-import closeIcon from "../../assets/cross-icon.png"; 
+import closeIcon from "../../assets/cross-icon.png";
 
-function GenreSidebar({ onSelectGenre, onClose }) {
-  const [genres, setGenres] = useState([]);
+interface GenreSidebarProps {
+  onSelectGenre: (genreId: number) => void;
+  onClose: () => void;
+}
+
+interface Genre {
+  id: number;
+  name: string;
+}
+
+const GenreSidebar: React.FC<GenreSidebarProps> = ({
+  onSelectGenre,
+  onClose,
+}) => {
+  const [genres, setGenres] = useState<Genre[]>([]);
 
   useEffect(() => {
     const options = {
@@ -39,6 +52,6 @@ function GenreSidebar({ onSelectGenre, onClose }) {
       </ul>
     </div>
   );
-}
+};
 
 export default GenreSidebar;
