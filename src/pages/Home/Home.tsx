@@ -7,7 +7,7 @@ const Home = () => {
 
   useEffect(() => {
     const img = new Image();
-    img.src = "./public/images/bodyHome.jpg";
+    img.src = "/images/bodyHome.jpg";
     img.onload = () => setLoading(false);
   }, []);
 
@@ -22,7 +22,7 @@ const Home = () => {
           <div className="imgBody">
             <img
               className="imgHeader"
-              src="./public/images/bodyHome.jpg"
+              src="/images/bodyHome.jpg"
               alt="body"
             />
           </div>
