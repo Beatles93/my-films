@@ -1,29 +1,31 @@
-@charset "UTF-8";
+import styled from "styled-components";
 
-.appHeader {
+export const HomeContainer = styled.div`
+  .appHeader {
     width: 100%;
     height: 100%;
-}
+  }
 
-.imgBody {
+  .imgBody {
     width: 100%;
     height: 100%;
-}
+  }
 
-.imgHeader {
+  .imgHeader {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
+  }
 
-.loaderContainer {
+  .loaderContainer {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-}
+  }
 
-.loader {
+  .loader {
     width: 100px;
     height: 100px;
-}
+  }
+`;

@@ -1,9 +1,21 @@
 import { useEffect, useState } from "react";
-import styles from "./MovieList.module.scss";
 import GenreSidebar from "../GenreSidebar/GenreSidebar";
 import { useNavigate } from "react-router-dom";
 import loaderSvg from "../../assets/loader.svg";
 import toggleIcon from "../../assets/button-icon.png";
+import {
+  PaginationButton,
+  ActivePageButton,
+  PaginationSpan,
+  Container,
+  ToggleIcon,
+  LoaderContainer,
+  Loader,
+  MovieContainer,
+  MovieItem,
+  MoviePoster,
+  PaginationContainer,
+} from "./styled-components";
 
 interface MovieListProps {
   query: string;
@@ -84,9 +96,12 @@ const MovieList: React.FC<MovieListProps> = ({ query }) => {
 
     if (currentPage > 1) {
       pageButtons.push(
-        <button key="prev" onClick={() => handlePageChange(currentPage - 1)}>
+        <PaginationButton
+          key="prev"
+          onClick={() => handlePageChange(currentPage - 1)}
+        >
           Earlier
-        </button>
+        </PaginationButton>
       );
     }
 
@@ -97,24 +112,27 @@ const MovieList: React.FC<MovieListProps> = ({ query }) => {
         (page >= currentPage - 2 && page <= currentPage + 2)
       ) {
         pageButtons.push(
-          <button
+          <PaginationButton
             key={page}
             onClick={() => handlePageChange(page)}
-            className={currentPage === page ? styles.activePage : ""}
+            className={currentPage === page ? ActivePageButton : ""}
           >
             {page}
-          </button>
+          </PaginationButton>
         );
       } else if (page === currentPage - 3 || page === currentPage + 3) {
-        pageButtons.push(<span key={page}>...</span>);
+        pageButtons.push(<PaginationSpan key={page}>...</PaginationSpan>);
       }
     }
 
     if (currentPage < totalPages) {
       pageButtons.push(
-        <button key="next" onClick={() => handlePageChange(currentPage + 1)}>
+        <PaginationButton
+          key="next"
+          onClick={() => handlePageChange(currentPage + 1)}
+        >
           Later
-        </button>
+        </PaginationButton>
       );
     }
 
@@ -122,11 +140,10 @@ const MovieList: React.FC<MovieListProps> = ({ query }) => {
   };
 
   return (
-    <div className={styles.container}>
-      <img
+    <Container>
+      <ToggleIcon
         src={toggleIcon}
         alt="Toggle Genres"
-        className={styles.toggleIcon}
         onClick={() => setShowGenres(!showGenres)}
       />
       {showGenres && (
@@ -136,30 +153,25 @@ const MovieList: React.FC<MovieListProps> = ({ query }) => {
         />
       )}
       {loading && currentPage === 1 ? (
-        <div className={styles.loaderContainer}>
-          <img src={loaderSvg} alt="Loading..." className={styles.loader} />
-        </div>
+        <LoaderContainer>
+          <Loader src={loaderSvg} alt="Loading..." />
+        </LoaderContainer>
       ) : (
-        <div className={styles.movieContainer}>
+        <MovieContainer>
           {movieList.map((movie) => (
-            <div
-              key={movie.id}
-              className={styles.movieItem}
-              onClick={() => handleClick(movie.id)}
-            >
-              <img
+            <MovieItem key={movie.id} onClick={() => handleClick(movie.id)}>
+              <MoviePoster
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                 alt={movie.title}
-                className={styles.moviePoster}
               />
-            </div>
+            </MovieItem>
           ))}
-        </div>
+        </MovieContainer>
       )}
       {!loading && totalPages > 1 && (
-        <div className={styles.paginationContainer}>{renderPageButtons()}</div>
+        <PaginationContainer>{renderPageButtons()}</PaginationContainer>
       )}
-    </div>
+    </Container>
   );
 };
 

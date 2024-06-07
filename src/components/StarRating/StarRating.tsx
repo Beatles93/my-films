@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./StarRating.module.scss";
+import { StarContainer, StarIcon } from "./styled-components";
 
 interface StarRatingProps {
   rating: number;
@@ -11,15 +11,15 @@ const StarRating: React.FC<StarRatingProps> = ({ rating }) => {
   const emptyStars = 5 - Math.ceil(rating);
 
   return (
-    <div className={styles.starRating}>
+    <StarContainer>
       {[...Array(fullStars)].map((_, index) => (
-        <i key={index} className="fas fa-star"></i>
+        <StarIcon key={index} className="fas fa-star"></StarIcon>
       ))}
       {halfStar && <i className="fas fa-star-half-alt"></i>}
       {[...Array(emptyStars)].map((_, index) => (
-        <i key={index} className="far fa-star"></i>
+        <StarIcon key={index} className="far fa-star"></StarIcon>
       ))}
-    </div>
+    </StarContainer>
   );
 };
 

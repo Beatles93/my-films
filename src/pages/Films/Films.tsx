@@ -1,18 +1,13 @@
 import React from "react";
 import MovieList from "../../components/Movie/MovieList";
-import styles from "./Films.module.scss";
+import { FilmsContainer } from "./styled-components";
 
-interface FilmsProps {
-  query: string;
-}
-
-const Films: React.FC<FilmsProps> = ({ query }) => {
+const Films: React.FC<{ query: string }> = ({ query }) => {
   return (
-    <div className={styles.films}>
+    <FilmsContainer>
       <MovieList query={query} />
-    </div>
+    </FilmsContainer>
   );
 };
 
 export default Films;
-

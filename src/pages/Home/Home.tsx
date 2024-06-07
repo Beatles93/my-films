@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import styles from "./Home.module.scss";
-import loaderSvg from "../../assets/loader.svg"; 
+import loaderSvg from "../../assets/loader.svg";
+import { HomeContainer } from "./styled-components";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -12,23 +12,23 @@ const Home = () => {
   }, []);
 
   return (
-    <div className={styles.home}>
+    <HomeContainer>
       {loading ? (
-        <div className={styles.loaderContainer}>
-          <img src={loaderSvg} alt="Loading..." className={styles.loader} />
+        <div className="loaderContainer">
+          <img src={loaderSvg} alt="Loading..." className="loader" />
         </div>
       ) : (
-        <header className={styles.appHeader}>
-          <div className={styles.imgBody}>
+        <header className="appHeader">
+          <div className="imgBody">
             <img
-              className={styles.imgHeader}
+              className="imgHeader"
               src="/images/bodyHome.jpg"
               alt="body"
             />
           </div>
         </header>
       )}
-    </div>
+    </HomeContainer>
   );
 };
 

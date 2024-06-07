@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from "react";
-import styles from "./Search.module.scss";
+import { SearchContainer, SearchInput } from "./styled-components";
 
 interface SearchProps {
   onSearch: (query: string) => void;
@@ -15,15 +15,14 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
   };
 
   return (
-    <div className={styles.searchContainer}>
-      <input
+    <SearchContainer>
+      <SearchInput
         type="text"
-        className={styles.searchInput}
         placeholder="Search for movies..."
         value={inputValue}
         onChange={handleInputChange}
       />
-    </div>
+    </SearchContainer>
   );
 };
 
