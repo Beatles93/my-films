@@ -1,9 +1,9 @@
-import styles from './Contacts.module.scss';
+import { ContactsContainer } from "./styled-components";
 
 const Contacts = () => {
-    return <div className={styles.contacts}>
+    return <ContactsContainer></ContactsContainer>
       
-  </div>;
+
 };
 
 export default Contacts;

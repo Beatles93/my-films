@@ -1,12 +1,16 @@
 import { useLocation } from "react-router-dom";
-import styles from "./Header.module.scss";
 import Navbar from "../Navbar/Navbar";
-import searchStyles from "../Search/Search.module.scss";
+import {
+  HeaderContainer,
+  Logo,
+  CenterContainer,
+  SearchContainer,
+  SearchInput,
+} from "./styled-components";
 
 interface HeaderProps {
   setQuery: (query: string) => void;
 }
-
 const Header: React.FC<HeaderProps> = ({ setQuery }) => {
   const location = useLocation();
 
@@ -17,22 +21,21 @@ const Header: React.FC<HeaderProps> = ({ setQuery }) => {
   const isFilmsPage = location.pathname === "/films";
 
   return (
-    <div className={styles.header}>
-      <h2 className={styles.logo}>My films</h2>
-      <div className={styles.centerContainer}>
+    <HeaderContainer>
+      <Logo>My films</Logo>
+      <CenterContainer>
         {isFilmsPage && (
-          <div className={styles.searchContainer}>
-            <input
+          <SearchContainer>
+            <SearchInput
               type="text"
-              className={searchStyles.searchInput}
               placeholder="Search for movies..."
               onChange={handleInputChange}
             />
-          </div>
+          </SearchContainer>
         )}
-      </div>
+      </CenterContainer>
       <Navbar />
-    </div>
+    </HeaderContainer>
   );
 };
 

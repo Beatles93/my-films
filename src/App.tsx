@@ -5,8 +5,8 @@ import Films from "./pages/Films/Films";
 import Serials from "./pages/Serials/Serials";
 import Header from "./components/Header/Header";
 import MovieDetails from "./components/MovieDetails/MovieDetails";
-import Footer from "./components/Footer /Footer";
-import styles from './App.module.scss'
+import Footer from "./components/Footer/Footer";
+import styles from "./App.module.scss";
 
 function App() {
   const [query, setQuery] = useState("");

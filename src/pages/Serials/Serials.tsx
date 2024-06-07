@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import styles from "./Serials.module.scss";
-import loaderSvg from "../../assets/loader.svg"; 
+import loaderSvg from "../../assets/loader.svg";
+import { SerialsContainer } from "./styled-components";
 
 const Serials = () => {
   const [loading, setLoading] = useState(true);
@@ -12,21 +12,23 @@ const Serials = () => {
   }, []);
 
   return (
-    <div className={styles.serials}>
+    <SerialsContainer>
       {loading ? (
-        <div className={styles.loaderContainer}>
-          <img src={loaderSvg} alt="Loading..." className={styles.loader} />
+        <div className="loaderContainer">
+          <img src={loaderSvg} alt="Loading..." className="loader" />
         </div>
       ) : (
-        <div className={styles.imgBody}>
-          <img
-            className={styles.imgHeader}
-            src="./public/images/bodySeries.jpg"
-            alt="body"
-          />
+        <div className="serials">
+          <div className="imgBody">
+            <img
+              className="imgHeader"
+              src="./public/images/bodySeries.jpg"
+              alt="body"
+            />
+          </div>
         </div>
       )}
-    </div>
+    </SerialsContainer>
   );
 };
 

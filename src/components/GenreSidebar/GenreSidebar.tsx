@@ -1,6 +1,14 @@
-import { useEffect, useState } from "react";
-import styles from "./GenreSidebar.module.scss";
+  import { useEffect, useState } from "react";
 import closeIcon from "../../assets/cross-icon.png";
+import {
+  GenreSidebarContainer,
+  Logo,
+  Header,
+  Title,
+  CloseButton,
+  GenreList,
+  GenreItem,
+} from "./styled-components";
 
 interface GenreSidebarProps {
   onSelectGenre: (genreId: number) => void;
@@ -35,22 +43,22 @@ const GenreSidebar: React.FC<GenreSidebarProps> = ({
   }, []);
 
   return (
-    <div className={styles.genreSidebar}>
-      <div className={styles.logo}>My films</div>
-      <div className={styles.header}>
-        <h3 className={styles.h3}>Genres</h3>
-        <button className={styles.closeButton} onClick={onClose}>
+    <GenreSidebarContainer>
+      <Logo>My films</Logo>
+      <Header>
+        <Title>Genres</Title>
+        <CloseButton onClick={onClose}>
           <img src={closeIcon} alt="Close" />
-        </button>
-      </div>
-      <ul>
+        </CloseButton>
+      </Header>
+      <GenreList>
         {genres.map((genre) => (
-          <li key={genre.id} onClick={() => onSelectGenre(genre.id)}>
+          <GenreItem key={genre.id} onClick={() => onSelectGenre(genre.id)}>
             {genre.name}
-          </li>
+          </GenreItem>
         ))}
-      </ul>
-    </div>
+      </GenreList>
+    </GenreSidebarContainer>
   );
 };
 

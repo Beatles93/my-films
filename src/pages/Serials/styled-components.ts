@@ -1,22 +1,20 @@
-@charset "UTF-8";
+import styled from "styled-components";
 
-.serials {
+export const SerialsContainer = styled.div`
+  .serials {
     width: 100%;
     height: 100%;
-}
+  }
 
-.loaderContainer {
+  .loaderContainer {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-}
+  }
 
-.loader {
+  .loader {
     width: 100px;
     height: 100px;
-
-}
-
-
-
+  }
+`;

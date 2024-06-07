@@ -1,27 +1,25 @@
-import { Link } from "react-router-dom";
-import styles from './Navbar.module.scss';
+import {
+  NavbarContainer,
+  NavList,
+  NavItem,
+  NavLink,
+} from "./styled-components";
 
 const Navbar = () => {
   return (
-    <nav className={styles.navbar}>
-      <ul className={styles.navList}>
-        <li className={styles.navItem}>
-          <Link to="/" className={styles.navLink}>
-            Home
-          </Link>
-        </li>
-        <li className={styles.navItem}>
-          <Link to="/films" className={styles.navLink}>
-            Films
-          </Link>
-        </li>
-        <li className={styles.navItem}>
-          <Link to="/series" className={styles.navLink}>
-            Series
-          </Link>
-        </li>
-      </ul>
-    </nav>
+    <NavbarContainer>
+      <NavList>
+        <NavItem>
+          <NavLink to="/">Home</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink to="/films">Films</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink to="/series">Series</NavLink>
+        </NavItem>
+      </NavList>
+    </NavbarContainer>
   );
 };
 

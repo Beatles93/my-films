@@ -1,8 +1,18 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import StarRating from "../StarRating/StarRating";
-import styles from "./MovieDetails.module.scss";
 import loaderSvg from "../../assets/loader.svg";
+import {
+  LoaderContainer,
+  Loader,
+  Container,
+  Poster,
+  Title,
+  Text,
+  Votes,
+  VoteCount,
+  BackButton,
+} from "./styled-components";
 
 interface MovieDetails {
   id: string;
@@ -40,9 +50,9 @@ const MovieDetails: React.FC = () => {
 
   if (loading) {
     return (
-      <div className={styles.loaderContainer}>
-        <img src={loaderSvg} alt="Loading..." className={styles.loader} />
-      </div>
+      <LoaderContainer>
+        <Loader src={loaderSvg} alt="Loading..." />
+      </LoaderContainer>
     );
   }
 
@@ -51,27 +61,22 @@ const MovieDetails: React.FC = () => {
   }
 
   return (
-    <div className={styles.movieDetails}>
-      <img
+    <Container>
+      <Poster
         src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
         alt={movieDetails.title}
-        className={styles.moviePoster}
       />
-      <h2 className={styles.movieTitle}>{movieDetails.title}</h2>
-      <p className={styles.movieReleaseDate}>
-        Release Date: {movieDetails.release_date}
-      </p>
-      <p className={styles.movieOverview}>{movieDetails.overview}</p>
-      <div className={styles.movieVotes}>
-        <StarRating rating={movieDetails.vote_average / 2} />{" "}
-        <span className={styles.voteCount}>
-          <i className={styles.fas}></i> {movieDetails.vote_count}
-        </span>
-      </div>
-      <button className={styles.backButton} onClick={() => navigate(-1)}>
-        Back to Films
-      </button>
-    </div>
+      <Title>{movieDetails.title}</Title>
+      <Text>Release Date: {movieDetails.release_date}</Text>
+      <Text>{movieDetails.overview}</Text>
+      <Votes>
+        <StarRating rating={movieDetails.vote_average / 2} />
+        <VoteCount>
+          <i className="fas fa-star"></i> {movieDetails.vote_count}
+        </VoteCount>
+      </Votes>
+      <BackButton onClick={() => navigate(-1)}>Back to Films</BackButton>
+    </Container>
   );
 };
 
