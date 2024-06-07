@@ -7,7 +7,7 @@ const Serials = () => {
 
   useEffect(() => {
     const img = new Image();
-    img.src = "./public/images/bodySeries.jpg";
+    img.src = "/images/bodySeries.jpg";
     img.onload = () => setLoading(false);
   }, []);
 
@@ -21,7 +21,7 @@ const Serials = () => {
         <div className={styles.imgBody}>
           <img
             className={styles.imgHeader}
-            src="./public/images/bodySeries.jpg"
+            src="/images/bodySeries.jpg"
             alt="body"
           />
         </div>
