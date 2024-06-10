@@ -1,14 +1,38 @@
 import { useState, useEffect } from "react";
 import loaderSvg from "../../assets/loader.svg";
 import { HomeContainer } from "./styled-components";
+import { MoviePoster } from "../../components/Movie/styled-components"; 
 
-const Home = () => {
+interface Movie {
+  id: number;
+  title: string;
+  poster_path: string;
+  vote_average: number;
+}
+
+const TopRatedMovies = () => {
   const [loading, setLoading] = useState(true);
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const API_KEY = "940420b28116a0814ea5530e8f40f139";
+  const API_URL = `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=ru-RU&page=1`;
 
   useEffect(() => {
-    const img = new Image();
-    img.src = "/images/bodyHome.jpg";
-    img.onload = () => setLoading(false);
+    const fetchMovies = async () => {
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setMovies(data.results);
+      } catch (error) {
+        console.error("Ошибка при загрузке данных:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMovies();
   }, []);
 
   return (
@@ -18,12 +42,21 @@ const Home = () => {
           <img src={loaderSvg} alt="Loading..." className="loader" />
         </div>
       ) : (
-          <div className="imgBody">
-            <img className="imgHeader" src="/images/bodyHome.jpg" alt="body" />
-          </div>
+        <div className="moviesGrid">
+          {movies.map((movie) => (
+            <div key={movie.id} className="movieCard">
+              <span className="rating">{movie.vote_average}</span>
+              <MoviePoster 
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                alt={movie.title}
+                className="moviePoster"
+              />
+            </div>
+          ))}
+        </div>
       )}
     </HomeContainer>
   );
 };
 
-export default Home;
+export default TopRatedMovies;
