@@ -18,15 +18,9 @@ const Home = () => {
           <img src={loaderSvg} alt="Loading..." className="loader" />
         </div>
       ) : (
-        <header className="appHeader">
           <div className="imgBody">
-            <img
-              className="imgHeader"
-              src="/images/bodyHome.jpg"
-              alt="body"
-            />
+            <img className="imgHeader" src="/images/bodyHome.jpg" alt="body" />
           </div>
-        </header>
       )}
     </HomeContainer>
   );
