@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import loaderSvg from "../../assets/loader.svg";
+import StarRating from "../StarRating/StarRating";
 import {
   LoaderContainer,
   Loader,
@@ -12,7 +13,6 @@ import {
   VoteCount,
   BackButton,
 } from "./styled-components";
-
 
 interface Series {
   poster_path: string;
@@ -73,7 +73,11 @@ const SerialsDetails: React.FC = () => {
       <Text>{serialDetails.overview}</Text>
       <Votes>
         <VoteCount>
-          <i className="fas fa-star"></i> {serialDetails.vote_count}
+          <StarRating rating={serialDetails.vote_average / 2} />
+          {serialDetails.vote_average} / 10
+        </VoteCount>
+        <VoteCount>
+          <i className="fas fa-star"></i> {serialDetails.vote_count} votes
         </VoteCount>
       </Votes>
       <BackButton onClick={() => navigate(-1)}>Back to Serials</BackButton>
