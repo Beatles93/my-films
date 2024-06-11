@@ -14,7 +14,7 @@ const TopRatedMovies = () => {
   const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState<Movie[]>([]);
   const API_KEY = "940420b28116a0814ea5530e8f40f139";
-  const API_URL = `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=ru-RU&page=1`;
+  const API_URL = `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`;
 
   useEffect(() => {
     const fetchMovies = async () => {
