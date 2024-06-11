@@ -15,7 +15,7 @@ const StarRating: React.FC<StarRatingProps> = ({ rating }) => {
       {[...Array(fullStars)].map((_, index) => (
         <StarIcon key={index} className="fas fa-star"></StarIcon>
       ))}
-      {halfStar && <i className="fas fa-star-half-alt"></i>}
+      {halfStar && <StarIcon className="fas fa-star-half-alt"></StarIcon>}
       {[...Array(emptyStars)].map((_, index) => (
         <StarIcon key={index} className="far fa-star"></StarIcon>
       ))}

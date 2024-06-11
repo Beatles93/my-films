@@ -29,6 +29,7 @@ const Serials = () => {
     )
       .then((response) => response.json())
       .then((data) => {
+        console.log(data.results);
         setSeries(data.results);
         setLoading(false);
       })
@@ -38,7 +39,7 @@ const Serials = () => {
       });
   }, []);
 
-  const handlePosterClick = (id) => {
+  const handlePosterClick = (id: number) => {
     navigate(`/series/${id}`);
   };
 
