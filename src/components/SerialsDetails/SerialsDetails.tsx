@@ -77,7 +77,7 @@ const SerialsDetails: React.FC = () => {
           {serialDetails.vote_average} / 10
         </VoteCount>
         <VoteCount>
-          <i className="fas fa-star"></i> {serialDetails.vote_count} votes
+          <i className="fas fa-star"></i> {serialDetails.vote_count} 
         </VoteCount>
       </Votes>
       <BackButton onClick={() => navigate(-1)}>Back to Serials</BackButton>
