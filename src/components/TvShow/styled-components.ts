@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-export const SerialsContainer = styled.div`
+export const TvShowContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
-export const ContainerSerials = styled.div`
+export const ContainerTvShow = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -14,7 +14,7 @@ export const ContainerSerials = styled.div`
   background-color: #f0f0f0;
 `;
 
-export const SerialsItem = styled.div`
+export const TvShowItem = styled.div`
   flex: 1 1 calc(100% - 40px);
   max-width: 200px;
   background-color: #fff;
@@ -54,7 +54,7 @@ export const SerialsItem = styled.div`
     max-width: 15%;
   }
 `
-export const SerialsPoster = styled.img`
+export const TvShowPoster = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
