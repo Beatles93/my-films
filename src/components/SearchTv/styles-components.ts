@@ -1,31 +1,12 @@
 import styled from "styled-components";
 
-export const HeaderContainer = styled.div`
-  background-color: #5398cd;
-  color: #fff;
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-export const Logo = styled.h2`
-  font-size: 24px;
-  font-weight: bold;
-`;
-
-export const CenterContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
 export const SearchContainer = styled.div`
   display: flex;
   align-items: center;
 `;
 
 export const SearchInput = styled.input`
-  padding: 10px 15px;
+   padding: 10px 15px;
   font-size: 16px;
   border-radius: 20px;
   border: 2px solid #ccc;
@@ -42,6 +23,5 @@ export const SearchInput = styled.input`
   &::placeholder {
     color: #999;
   }
- `;
-
+`;
 

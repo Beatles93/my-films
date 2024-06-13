@@ -5,7 +5,7 @@ interface SearchProps {
   onSearch: (query: string) => void;
 }
 
-const Search: React.FC<SearchProps> = ({ onSearch }) => {
+const SearchMovie: React.FC<SearchProps> = ({ onSearch }) => {
   const [inputValue, setInputValue] = useState<string>("");
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -26,4 +26,4 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
   );
 };
 
-export default Search;
+export default SearchMovie;

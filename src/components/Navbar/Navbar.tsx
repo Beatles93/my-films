@@ -16,7 +16,7 @@ const Navbar = () => {
           <NavLink to="/films">Films</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink to="/series">Series</NavLink>
+          <NavLink to="/tvShow">TV Show</NavLink> 
         </NavItem>
       </NavList>
     </NavbarContainer>
