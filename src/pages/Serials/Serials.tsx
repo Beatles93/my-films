@@ -18,13 +18,11 @@ const Serials = () => {
       method: "GET",
       headers: {
         accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMWE4NzE1ZjNkMjAyODIxMDNhNDQ5NmVlMGY5YWM0ZCIsInN1YiI6IjY2M2Y3YWY0YWNmNDk4YWYzMGMxOWM4ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mf2xIlXEIZpUKLT_VRMBqk-kJQxFztvQqq5kQVdjGIg",
       },
     };
 
     fetch(
-      "https://api.themoviedb.org/3/tv/popular?language=en-US&page=1",
+      "https://api.themoviedb.org/3/discover/tv?api_key=940420b28116a0814ea5530e8f40f139&include_adult=false&include_null_first_air_dates=false&language=en-US&page=1&sort_by=popularity.desc",
       options
     )
       .then((response) => response.json())
