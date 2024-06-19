@@ -1,19 +1,6 @@
 import styled from "styled-components";
 
 export const HomeContainer = styled.div`
-  .loaderContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden;
-  }
-
-  .loader {
-    width: 100px;
-    height: 100px;
-  }
-
   .moviesGrid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -56,6 +43,21 @@ export const HomeContainer = styled.div`
     }
   }
 `;
+
+export const LoaderContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+`;
+
+export const MoviePoster = styled.img`
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #ddd;
+`;
+
 
 
 
