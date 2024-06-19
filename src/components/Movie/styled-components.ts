@@ -6,16 +6,6 @@ export const Container = styled.div`
   align-items: center;
 `;
 
-export const ToggleIcon = styled.img`
-  position: fixed;
-  top: 100px;
-  left: 5px;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  z-index: 1000;
-`;
-
 export const MovieContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -114,4 +104,13 @@ export const PaginationSpan = styled.span`
 
 export const ActivePageButton = styled(PaginationButton)`
   background-color: #5398cd !important;
+`;
+export const ToggleIcon = styled.img`
+  position: fixed;
+  top: 100px;
+  left: 5px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 1000;
 `;

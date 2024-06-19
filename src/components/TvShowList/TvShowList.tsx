@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import loaderSvg from "../../assets/loader.svg";
+import toggleIcon from "../../assets/button-icon.png";
+import GenresSidebarTvShow from "../GenreSidebarTvShow/GenreSidebarTvShow";
 import {
   ContainerTvShow,
   TvShowContainer,
@@ -12,6 +14,7 @@ import {
   PaginationButton,
   PaginationSpan,
   ActivePageButton,
+  ToggleIcon,
 } from "./styled-components";
 
 interface TvShowListProps {
@@ -23,9 +26,11 @@ const TvShowList: React.FC<TvShowListProps> = ({ query }) => {
   const [tvShows, setTvShows] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
+  const [showGenres, setShowGenres] = useState(false);
   const navigate = useNavigate();
-  
-  const fetchTvShows = (searchQuery = "", page = 1) => {
+
+  const fetchTvShows = (searchQuery = "", genre = null, page = 1) => {
     const options = {
       method: "GET",
       headers: {
@@ -39,6 +44,8 @@ const TvShowList: React.FC<TvShowListProps> = ({ query }) => {
 
     if (searchQuery) {
       url = `https://api.themoviedb.org/3/search/tv?query=${searchQuery}&include_adult=false&language=en-US&page=${page}`;
+    } else if (genre) {
+      url = `https://api.themoviedb.org/3/discover/tv?with_genres=${genre}&include_adult=false&language=en-US&page=${page}&sort_by=popularity.desc`;
     }
 
     setLoading(true);
@@ -62,8 +69,8 @@ const TvShowList: React.FC<TvShowListProps> = ({ query }) => {
 
   useEffect(() => {
     setCurrentPage(1);
-    fetchTvShows(query);
-  }, [query]);
+    fetchTvShows(query, selectedGenre);
+  }, [query, selectedGenre]);
 
   const handlePosterClick = (id: number) => {
     navigate(`/series/${id}`);
@@ -72,8 +79,14 @@ const TvShowList: React.FC<TvShowListProps> = ({ query }) => {
   const handlePageChange = (page: number) => {
     if (page > 0 && page <= totalPages) {
       setCurrentPage(page);
-      fetchTvShows(query, page);
+      fetchTvShows(query, selectedGenre, page);
     }
+  };
+
+  const handleSelectGenre = (genreId: number) => {
+    setSelectedGenre(genreId);
+    setCurrentPage(1);
+    fetchTvShows(query, genreId, 1);
   };
 
   const renderPageButtons = () => {
@@ -126,6 +139,17 @@ const TvShowList: React.FC<TvShowListProps> = ({ query }) => {
 
   return (
     <TvShowContainer>
+      <ToggleIcon
+        src={toggleIcon}
+        alt="Toggle Genres"
+        onClick={() => setShowGenres(!showGenres)}
+      />
+      {showGenres && (
+        <GenresSidebarTvShow
+          onSelectGenre={handleSelectGenre}
+          onClose={() => setShowGenres(false)}
+        />
+      )}
       {loading ? (
         <LoaderContainer>
           <Loader src={loaderSvg} alt="Loading..." />

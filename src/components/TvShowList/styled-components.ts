@@ -83,7 +83,7 @@ export const PaginationContainer = styled.div`
 `;
 
 export const PaginationButton = styled.button`
-  background-color: #5398cd;
+ background-color: #5398cd;
   color: #fff;
   border: none;
   padding: 10px 15px;
@@ -97,11 +97,21 @@ export const PaginationButton = styled.button`
 `;
 
 export const PaginationSpan = styled.span`
-  background-color: transparent;
+ background-color: transparent;
   color: #000;
   cursor: default;
 `;
 
 export const ActivePageButton = styled(PaginationButton)`
   background-color: #5398cd !important;
+`;
+
+export const ToggleIcon = styled.img`
+  position: fixed;
+  top: 100px;
+  left: 5px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 1000;
 `;
