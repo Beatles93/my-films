@@ -1,4 +1,4 @@
-  import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import closeIcon from "../../assets/cross-icon.png";
 import {
   GenreSidebarContainer,
@@ -20,23 +20,23 @@ interface Genre {
   name: string;
 }
 
-const GenreSidebar: React.FC<GenreSidebarProps> = ({
+const GenreSidebarTvShow: React.FC<GenreSidebarProps> = ({
   onSelectGenre,
   onClose,
 }) => {
   const [genres, setGenres] = useState<Genre[]>([]);
 
   useEffect(() => {
-    const options = {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMWE4NzE1ZjNkMjAyODIxMDNhNDQ5NmVlMGY5YWM0ZCIsInN1YiI6IjY2M2Y3YWY0YWNmNDk4YWYzMGMxOWM4ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mf2xIlXEIZpUKLT_VRMBqk-kJQxFztvQqq5kQVdjGIg",
-      },
-    };
+      const options = {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMWE4NzE1ZjNkMjAyODIxMDNhNDQ5NmVlMGY5YWM0ZCIsInN1YiI6IjY2M2Y3YWY0YWNmNDk4YWYzMGMxOWM4ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mf2xIlXEIZpUKLT_VRMBqk-kJQxFztvQqq5kQVdjGIg",
+        },
+      };
 
-    fetch("https://api.themoviedb.org/3/genre/movie/list?language=en", options)
+    fetch("https://api.themoviedb.org/3/genre/tv/list?language=en", options)
       .then((response) => response.json())
       .then((response) => setGenres(response.genres))
       .catch((err) => console.error(err));
@@ -44,7 +44,7 @@ const GenreSidebar: React.FC<GenreSidebarProps> = ({
 
   return (
     <GenreSidebarContainer>
-      <Logo>My films</Logo>
+      <Logo>My Shows</Logo>
       <Header>
         <Title>Genres</Title>
         <CloseButton onClick={onClose}>
@@ -62,4 +62,4 @@ const GenreSidebar: React.FC<GenreSidebarProps> = ({
   );
 };
 
-export default GenreSidebar;
+export default GenreSidebarTvShow;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import GenreSidebar from "../GenreSidebar/GenreSidebar";
+import GenreSidebar from "../GenreSidebarMovie/GenreSidebarMovie";
 import { useNavigate } from "react-router-dom";
 import loaderSvg from "../../assets/loader.svg";
 import toggleIcon from "../../assets/button-icon.png";
