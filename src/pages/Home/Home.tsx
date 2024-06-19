@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 import loaderSvg from "../../assets/loader.svg";
-import { HomeContainer } from "./styled-components";
-import { MoviePoster } from "../../components/Movie/styled-components"; 
+import {
+  HomeContainer,
+  MoviePoster,
+  LoaderContainer,
+} from "./styled-components";
+import FeaturedMovie from "../../components/FeaturedMovie/FeaturedMovie";
+
 
 interface Movie {
   id: number;
@@ -26,7 +31,7 @@ const TopRatedMovies = () => {
         const data = await response.json();
         setMovies(data.results);
       } catch (error) {
-        console.error("Ошибка при загрузке данных:", error);
+        console.error("Error fetching movies:", error);
       } finally {
         setLoading(false);
       }
@@ -38,22 +43,25 @@ const TopRatedMovies = () => {
   return (
     <HomeContainer>
       {loading ? (
-        <div className="loaderContainer">
+        <LoaderContainer>
           <img src={loaderSvg} alt="Loading..." className="loader" />
-        </div>
+        </LoaderContainer>
       ) : (
-        <div className="moviesGrid">
-          {movies.map((movie) => (
-            <div key={movie.id} className="movieCard">
-              <span className="rating">{movie.vote_average}</span>
-              <MoviePoster 
-                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                alt={movie.title}
-                className="moviePoster"
-              />
-            </div>
-          ))}
-        </div>
+        <>
+          <FeaturedMovie />
+          <div className="moviesGrid">
+            {movies.map((movie) => (
+              <div key={movie.id} className="movieCard">
+                <span className="rating">{movie.vote_average}</span>
+                <MoviePoster
+                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  alt={movie.title}
+                  className="moviePoster"
+                />
+              </div>
+            ))}
+          </div>
+        </>
       )}
     </HomeContainer>
   );
