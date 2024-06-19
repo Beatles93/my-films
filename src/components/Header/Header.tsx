@@ -1,11 +1,13 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import React from "react";
+import { useLocation } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
+import SearchMovie from "../SearchMovie/SearchMovie";
+import SearchTv from "../SearchTv/SearchTv";
 import {
   HeaderContainer,
   Logo,
   CenterContainer,
   SearchContainer,
-  SearchInput,
 } from "./styled-components";
 
 interface HeaderProps {
@@ -14,45 +16,19 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ setQuery }) => {
   const location = useLocation();
-  const navigate = useNavigate();
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value);
-  };
-
-  const handleFilmsClick = () => {
-    setQuery(""); // Очищаем запрос при переходе на страницу фильмов
-    navigate("/films"); // Переходим на страницу фильмов
-  };
-
-  const handleTvShowClick = () => {
-    setQuery(""); // Очищаем запрос при переходе на страницу TV Show
-    navigate("/tvshow"); // Переходим на страницу TV Show
-  };
-
-  const isFilmsPage = location.pathname === "/films";
-  const isTvShowPage = location.pathname === "/tvShow";
 
   return (
     <HeaderContainer>
-      <Logo>My films</Logo>
+      <Logo>My Films</Logo>
       <CenterContainer>
-        {isFilmsPage && (
+        {location.pathname === "/films" && (
           <SearchContainer>
-            <SearchInput
-              type="text"
-              placeholder="Search for movies..."
-              onChange={handleInputChange}
-            />
+            <SearchMovie onSearch={setQuery} />
           </SearchContainer>
         )}
-        {isTvShowPage && (
+        {location.pathname === "/tvShow" && (
           <SearchContainer>
-            <SearchInput
-              type="text"
-              placeholder="Search for TV shows..."
-              onChange={handleInputChange}
-            />
+            <SearchTv onSearch={setQuery} />
           </SearchContainer>
         )}
       </CenterContainer>

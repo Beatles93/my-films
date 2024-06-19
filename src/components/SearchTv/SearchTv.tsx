@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent } from "react";
 import { SearchContainer, SearchInput } from "./styles-components";
 
 interface SearchTvProps {
@@ -16,12 +16,12 @@ const SearchTv: React.FC<SearchTvProps> = ({ onSearch }) => {
 
   return (
     <SearchContainer>
-      {/* <SearchInput
+      <SearchInput
         type="text"
         placeholder="Search for TV shows..."
         value={inputValue}
         onChange={handleInputChange}
-      /> */}
+      />
     </SearchContainer>
   );
 };

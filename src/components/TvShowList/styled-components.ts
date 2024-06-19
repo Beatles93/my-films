@@ -5,6 +5,7 @@ export const TvShowContainer = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
 export const ContainerTvShow = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -53,10 +54,54 @@ export const TvShowItem = styled.div`
     flex: 1 1 calc(16.66% - 40px);
     max-width: 15%;
   }
-`
+`;
+
 export const TvShowPoster = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 12px;
+`;
+
+export const LoaderContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`;
+
+export const Loader = styled.img`
+  width: 100px;
+  height: 100px;
+`;
+
+export const PaginationContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  gap: 5px;
+`;
+
+export const PaginationButton = styled.button`
+  background-color: #5398cd;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #608bb6;
+  }
+`;
+
+export const PaginationSpan = styled.span`
+  background-color: transparent;
+  color: #000;
+  cursor: default;
+`;
+
+export const ActivePageButton = styled(PaginationButton)`
+  background-color: #5398cd !important;
 `;
