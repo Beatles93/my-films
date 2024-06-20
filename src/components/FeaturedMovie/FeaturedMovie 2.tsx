@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { FeaturedMovieContainer } from "./styled-components";
 
+    
+    
 const API_KEY = "940420b28116a0814ea5530e8f40f139";
 const FEATURED_API_URL = `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`;
 
 const FeaturedMovie = () => {
   const [movie, setMovie] = useState(null);
-  
+
   useEffect(() => {
     const fetchMovie = async () => {
       try {

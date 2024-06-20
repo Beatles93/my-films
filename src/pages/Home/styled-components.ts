@@ -1,15 +1,18 @@
 import styled from "styled-components";
 
 export const HomeContainer = styled.div`
-  .moviesGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    padding: 20px;
-  }
-
   .movieCard {
     position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
   }
 
   .rating {
@@ -26,7 +29,17 @@ export const HomeContainer = styled.div`
   .moviePoster {
     width: 100%;
     height: auto;
+    border-radius: 12px;
+    object-fit: cover;
     border-bottom: 1px solid #ddd;
+    
+    
+  }
+
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   @media (max-width: 768px) {
@@ -49,18 +62,14 @@ export const LoaderContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  overflow: hidden;
 `;
 
 export const MoviePoster = styled.img`
   width: 100%;
-  height: auto;
-  border-bottom: 1px solid #ddd;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
 `;
-
-
-
-
 
 
 
