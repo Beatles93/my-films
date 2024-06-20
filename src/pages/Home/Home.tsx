@@ -1,4 +1,7 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper-bundle.css";
+import "swiper/css";
 import loaderSvg from "../../assets/loader.svg";
 import {
   HomeContainer,
@@ -6,7 +9,6 @@ import {
   LoaderContainer,
 } from "./styled-components";
 import FeaturedMovie from "../../components/FeaturedMovie/FeaturedMovie";
-
 
 interface Movie {
   id: number;
@@ -49,18 +51,26 @@ const TopRatedMovies = () => {
       ) : (
         <>
           <FeaturedMovie />
-          <div className="moviesGrid">
+          <Swiper
+            slidesPerView={10} 
+            slidesPerColumn={2} 
+            spaceBetween={20} 
+            navigation
+            pagination={{ clickable: true }}
+          >
             {movies.map((movie) => (
-              <div key={movie.id} className="movieCard">
-                <span className="rating">{movie.vote_average}</span>
-                <MoviePoster
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  alt={movie.title}
-                  className="moviePoster"
-                />
-              </div>
+              <SwiperSlide key={movie.id}>
+                <div className="movieCard">
+                  <span className="rating">{movie.vote_average}</span>
+                  <MoviePoster
+                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    alt={movie.title}
+                    className="moviePoster"
+                  />
+                </div>
+              </SwiperSlide>
             ))}
-          </div>
+          </Swiper>
         </>
       )}
     </HomeContainer>
