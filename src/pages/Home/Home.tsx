@@ -35,7 +35,9 @@ const TopRatedMovies = () => {
         }
         const data = await response.json();
         setMovies(data.results);
-        setSelectedMovie(data.results[0]); 
+        setSelectedMovie(
+          data.results[Math.floor(Math.random() * data.results.length)]
+        ); 
       } catch (error) {
         console.error("Error fetching movies:", error);
       } finally {
@@ -45,6 +47,16 @@ const TopRatedMovies = () => {
 
     fetchMovies();
   }, []);
+
+  useEffect(() => {
+    if (movies.length > 0) {
+      const interval = setInterval(() => {
+        setSelectedMovie(movies[Math.floor(Math.random() * movies.length)]);
+      }, 15000); 
+
+      return () => clearInterval(interval);
+    }
+  }, [movies]);
 
   const handlePosterClick = (movie: Movie) => {
     setSelectedMovie(movie);
