@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import "swiper/css";
@@ -14,12 +14,15 @@ interface Movie {
   id: number;
   title: string;
   poster_path: string;
+  backdrop_path: string;
+  overview: string;
   vote_average: number;
 }
 
 const TopRatedMovies = () => {
   const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const API_KEY = "940420b28116a0814ea5530e8f40f139";
   const API_URL = `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`;
 
@@ -32,6 +35,7 @@ const TopRatedMovies = () => {
         }
         const data = await response.json();
         setMovies(data.results);
+        setSelectedMovie(data.results[0]); 
       } catch (error) {
         console.error("Error fetching movies:", error);
       } finally {
@@ -42,6 +46,10 @@ const TopRatedMovies = () => {
     fetchMovies();
   }, []);
 
+  const handlePosterClick = (movie: Movie) => {
+    setSelectedMovie(movie);
+  };
+
   return (
     <HomeContainer>
       {loading ? (
@@ -50,17 +58,20 @@ const TopRatedMovies = () => {
         </LoaderContainer>
       ) : (
         <>
-          <FeaturedMovie />
+          {selectedMovie && <FeaturedMovie movie={selectedMovie} />}
           <Swiper
-            slidesPerView={10} 
-            slidesPerColumn={2} 
-            spaceBetween={20} 
+            slidesPerView={10}
+            slidesPerColumn={2}
+            spaceBetween={20}
             navigation
             pagination={{ clickable: true }}
           >
             {movies.map((movie) => (
               <SwiperSlide key={movie.id}>
-                <div className="movieCard">
+                <div
+                  className="movieCard"
+                  onClick={() => handlePosterClick(movie)}
+                >
                   <span className="rating">{movie.vote_average}</span>
                   <MoviePoster
                     src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
