@@ -1,33 +1,12 @@
-import { useEffect, useState } from "react";
 import { FeaturedMovieContainer } from "./styled-components";
 
-const API_KEY = "940420b28116a0814ea5530e8f40f139";
-const FEATURED_API_URL = `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`;
+interface Movie {
+  title: string;
+  backdrop_path: string;
+  overview: string;
+}
 
-const FeaturedMovie = () => {
-  const [movie, setMovie] = useState(null);
-  
-  useEffect(() => {
-    const fetchMovie = async () => {
-      try {
-        const response = await fetch(FEATURED_API_URL);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        setMovie(data.results[0]);
-      } catch (error) {
-        console.error("Error fetching featured movie:", error);
-      }
-    };
-
-    fetchMovie();
-  }, []);
-
-  if (!movie) {
-    return null;
-  }
-
+const FeaturedMovie = ({ movie }: { movie: Movie }) => {
   return (
     <FeaturedMovieContainer>
       <img
@@ -44,4 +23,3 @@ const FeaturedMovie = () => {
 };
 
 export default FeaturedMovie;
-

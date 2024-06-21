@@ -8,6 +8,7 @@ export const HomeContainer = styled.div`
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
+    margin-bottom: 40px;
 
     &:hover {
       transform: translateY(-10px);
@@ -32,8 +33,6 @@ export const HomeContainer = styled.div`
     border-radius: 12px;
     object-fit: cover;
     border-bottom: 1px solid #ddd;
-    
-    
   }
 
   .swiper-slide {

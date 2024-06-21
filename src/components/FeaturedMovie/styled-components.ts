@@ -19,21 +19,20 @@ export const FeaturedMovieContainer = styled.div`
     bottom: 30px;
     left: 30px;
     max-width: 600px;
-    background-color: rgba(255, 255, 255, 0.9); /* Светлый фон */
-    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9); 
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
     h1 {
       font-size: 2.5rem;
       margin: 0;
-      color: #5398cd; /* Цвет заголовка */
+      color: #5398cd; 
     }
 
     p {
       font-size: 1.2rem;
       margin: 10px 0 0 0;
-      color: #666; /* Цвет текста */
+      color: #666; 
     }
   }
 
