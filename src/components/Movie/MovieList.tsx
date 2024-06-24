@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import GenreSidebar from "../GenreSidebarMovie/GenreSidebarMovie";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useFavoriteStore } from "../../store/store";
 import loaderSvg from "../../assets/loader.svg";
 import toggleIcon from "../../assets/button-icon.png";
 import {
@@ -14,6 +14,7 @@ import {
   MovieContainer,
   MovieItem,
   MoviePoster,
+  HeartIcon,
   PaginationContainer,
 } from "./styled-components";
 
@@ -35,9 +36,14 @@ const MovieList: React.FC<MovieListProps> = ({ query }) => {
   const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
   const [showGenres, setShowGenres] = useState(false);
   const navigate = useNavigate();
+  const addToFavorites = useFavoriteStore((state) => state.addToFavorites); 
 
   const handleClick = (id: number) => {
     navigate(`/movie/${id}`);
+  };
+
+  const handleAddToFavorites = (movie: Movie) => {
+    addToFavorites(movie);
   };
 
   const getMovie = (query: string, page = 1) => {
@@ -160,6 +166,14 @@ const MovieList: React.FC<MovieListProps> = ({ query }) => {
         <MovieContainer>
           {movieList.map((movie) => (
             <MovieItem key={movie.id} onClick={() => handleClick(movie.id)}>
+              <HeartIcon
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleAddToFavorites(movie);
+                }}
+              >
+                ❤️
+              </HeartIcon>
               <MoviePoster
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                 alt={movie.title}
