@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const HeaderContainer = styled.div`
   background-color: #5398cd;
@@ -24,24 +25,19 @@ export const SearchContainer = styled.div`
   align-items: center;
 `;
 
-export const SearchInput = styled.input`
+export const FavoritesLink = styled(Link)`
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
   padding: 10px 15px;
-  font-size: 16px;
-  border-radius: 20px;
-  border: 2px solid #ccc;
-  background-color: #f9f9f9;
-  outline: none;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: border-color 0.3s, box-shadow 0.3s;
+  border-radius: 5px;
+  background-color: #608bb6;
+  transition: background-color 0.3s ease;
 
-  &:focus {
-    border-color: #608bb6;
-    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+  &:hover {
+    background-color: #4a7599;
   }
+`;
 
-  &::placeholder {
-    color: #999;
-  }
- `;
 
 

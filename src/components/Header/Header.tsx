@@ -8,6 +8,7 @@ import {
   Logo,
   CenterContainer,
   SearchContainer,
+  FavoritesLink,
 } from "./styled-components";
 
 interface HeaderProps {
@@ -32,6 +33,7 @@ const Header: React.FC<HeaderProps> = ({ setQuery }) => {
           </SearchContainer>
         )}
       </CenterContainer>
+      <FavoritesLink to="/favorites">Favorites</FavoritesLink>
       <Navbar />
     </HeaderContainer>
   );

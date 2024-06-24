@@ -24,6 +24,7 @@ export const MovieItem = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
   cursor: pointer;
+  position: relative;
 
   &:hover {
     transform: translateY(-10px);
@@ -61,6 +62,22 @@ export const MoviePoster = styled.img`
   height: 100%;
   object-fit: cover;
   border-radius: 12px;
+`;
+
+export const HeartIcon = styled.div`
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 1);
+  }
 `;
 
 export const LoaderContainer = styled.div`
@@ -105,6 +122,7 @@ export const PaginationSpan = styled.span`
 export const ActivePageButton = styled(PaginationButton)`
   background-color: #5398cd !important;
 `;
+
 export const ToggleIcon = styled.img`
   position: fixed;
   top: 100px;
@@ -114,3 +132,4 @@ export const ToggleIcon = styled.img`
   cursor: pointer;
   z-index: 1000;
 `;
+

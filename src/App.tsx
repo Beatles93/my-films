@@ -6,11 +6,17 @@ import TvShow from "./components/TvShowList/TvShowList";
 import TvShowDetails from "./components/TvShowDetails/TvShowDetails";
 import Header from "./components/Header/Header";
 import MovieDetails from "./components/MovieDetails/MovieDetails";
+import FavoriteList from "./components/FavoriteList/FavoriteList";
 import Footer from "./components/Footer/Footer";
 import styles from "./App.module.scss";
 
 function App() {
   const [query, setQuery] = useState("");
+  const [favorites, setFavorites] = useState([]);
+
+  const addToFavorites = (movie) => {
+    setFavorites((prevFavorites) => [...prevFavorites, movie]);
+  };
 
   return (
     <div className={styles.app}>
@@ -18,10 +24,17 @@ function App() {
         <Header setQuery={setQuery} />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/films" element={<Films query={query} />} />
+          <Route
+            path="/films"
+            element={<Films query={query} addToFavorites={addToFavorites} />}
+          />
           <Route path="/tvShow" element={<TvShow query={query} />} />
           <Route path="/series/:id" element={<TvShowDetails />} />
           <Route path="/movie/:id" element={<MovieDetails />} />
+          <Route
+            path="/favorites"
+            element={<FavoriteList favorites={favorites} />}
+          />
         </Routes>
         <Footer />
       </BrowserRouter>
