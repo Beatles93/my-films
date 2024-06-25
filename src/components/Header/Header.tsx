@@ -5,6 +5,7 @@ import SearchMovie from "../SearchMovie/SearchMovie";
 import SearchTv from "../SearchTv/SearchTv";
 import {
   HeaderContainer,
+  LogoFavoritesContainer,
   Logo,
   CenterContainer,
   SearchContainer,
@@ -20,7 +21,10 @@ const Header: React.FC<HeaderProps> = ({ setQuery }) => {
 
   return (
     <HeaderContainer>
-      <Logo>My Films</Logo>
+      <LogoFavoritesContainer>
+        <Logo>My Films</Logo>
+        <FavoritesLink to="/favorites">Favorites</FavoritesLink>
+      </LogoFavoritesContainer>
       <CenterContainer>
         {location.pathname === "/films" && (
           <SearchContainer>
@@ -33,7 +37,6 @@ const Header: React.FC<HeaderProps> = ({ setQuery }) => {
           </SearchContainer>
         )}
       </CenterContainer>
-      <FavoritesLink to="/favorites">Favorites</FavoritesLink>
       <Navbar />
     </HeaderContainer>
   );

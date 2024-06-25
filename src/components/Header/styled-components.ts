@@ -10,9 +10,15 @@ export const HeaderContainer = styled.div`
   align-items: center;
 `;
 
+export const LogoFavoritesContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 export const Logo = styled.h2`
   font-size: 24px;
   font-weight: bold;
+  margin-right: 10px; /* Optional, adjust for spacing */
 `;
 
 export const CenterContainer = styled.div`
@@ -31,13 +37,16 @@ export const FavoritesLink = styled(Link)`
   font-size: 18px;
   padding: 10px 15px;
   border-radius: 5px;
-  background-color: #608bb6;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 
   &:hover {
-    background-color: #4a7599;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
   }
 `;
+
+
+
 
 
 
