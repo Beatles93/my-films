@@ -24,6 +24,7 @@ export const TvShowItem = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
   cursor: pointer;
+  position: relative;
 
   &:hover {
     transform: translateY(-10px);
@@ -63,11 +64,27 @@ export const TvShowPoster = styled.img`
   border-radius: 12px;
 `;
 
+export const HeartIcon = styled.div`
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 1);
+  }
+`;
+
 export const LoaderContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 80vh;
 `;
 
 export const Loader = styled.img`
@@ -78,40 +95,69 @@ export const Loader = styled.img`
 export const PaginationContainer = styled.div`
   display: flex;
   justify-content: center;
-  padding: 20px;
-  gap: 5px;
+  align-items: center;
+  margin: 20px 0;
 `;
 
 export const PaginationButton = styled.button`
- background-color: #5398cd;
-  color: #fff;
-  border: none;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
   padding: 10px 15px;
-  border-radius: 5px;
+  margin: 0 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #608bb6;
+    background-color: #f0f0f0;
   }
 `;
 
 export const PaginationSpan = styled.span`
- background-color: transparent;
-  color: #000;
-  cursor: default;
+  padding: 10px 15px;
 `;
 
 export const ActivePageButton = styled(PaginationButton)`
-  background-color: #5398cd !important;
+  background-color: #000000;
+  color: #ffffff;
 `;
 
 export const ToggleIcon = styled.img`
-  position: fixed;
-  top: 100px;
-  left: 5px;
   width: 40px;
   height: 40px;
   cursor: pointer;
-  z-index: 1000;
+  margin: 20px 0;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
 `;
+
+export const SidebarGenresContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  width: 80%;
+  padding: 20px;
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  @media (min-width: 768px) {
+    width: 300px;
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+    box-shadow: none;
+  }
+`;
+

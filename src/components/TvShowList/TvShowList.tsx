@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useFavoriteStore } from "../../store/store"; 
 import loaderSvg from "../../assets/loader.svg";
 import toggleIcon from "../../assets/button-icon.png";
 import GenresSidebarTvShow from "../GenreSidebarTvShow/GenreSidebarTvShow";
@@ -8,6 +9,7 @@ import {
   TvShowContainer,
   TvShowItem,
   TvShowPoster,
+  HeartIcon,
   LoaderContainer,
   Loader,
   PaginationContainer,
@@ -29,6 +31,7 @@ const TvShowList: React.FC<TvShowListProps> = ({ query }) => {
   const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
   const [showGenres, setShowGenres] = useState(false);
   const navigate = useNavigate();
+  const addToFavorites = useFavoriteStore((state) => state.addToFavorites); // Add to favorites function
 
   const fetchTvShows = (searchQuery = "", genre = null, page = 1) => {
     const options = {
@@ -74,6 +77,10 @@ const TvShowList: React.FC<TvShowListProps> = ({ query }) => {
 
   const handlePosterClick = (id: number) => {
     navigate(`/series/${id}`);
+  };
+
+  const handleAddToFavorites = (tvShow) => {
+    addToFavorites(tvShow);
   };
 
   const handlePageChange = (page: number) => {
@@ -162,6 +169,14 @@ const TvShowList: React.FC<TvShowListProps> = ({ query }) => {
                 key={tvShow.id}
                 onClick={() => handlePosterClick(tvShow.id)}
               >
+                <HeartIcon
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleAddToFavorites(tvShow);
+                  }}
+                >
+                  ❤️
+                </HeartIcon>
                 <TvShowPoster
                   src={`https://image.tmdb.org/t/p/w200${tvShow.poster_path}`}
                   alt={tvShow.name}
@@ -180,4 +195,4 @@ const TvShowList: React.FC<TvShowListProps> = ({ query }) => {
   );
 };
 
-export default TvShowList;
+export default TvShowList;  
