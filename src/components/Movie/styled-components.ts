@@ -132,4 +132,3 @@ export const ToggleIcon = styled.img`
   cursor: pointer;
   z-index: 1000;
 `;
-

@@ -1,56 +1,46 @@
-import { useEffect, useState } from "react";
-import closeIcon from "../../assets/cross-icon.png";
+import React, { useState, useEffect } from "react";
 import {
   GenreSidebarContainer,
-  Logo,
-  Header,
-  Title,
   CloseButton,
   GenreList,
   GenreItem,
 } from "./styled-components";
-
-interface GenreSidebarProps {
-  onSelectGenre: (genreId: number) => void;
-  onClose: () => void;
-}
+import { Logo } from "../GenreSidebarTvShow/styled-components";
 
 interface Genre {
   id: number;
   name: string;
 }
 
-const GenreSidebarMovie: React.FC<GenreSidebarProps> = ({
+interface GenreSidebarProps {
+  onSelectGenre: (genreId: number) => void;
+  onClose: () => void;
+}
+
+const GenreSidebar: React.FC<GenreSidebarProps> = ({
   onSelectGenre,
   onClose,
 }) => {
   const [genres, setGenres] = useState<Genre[]>([]);
 
   useEffect(() => {
-    const options = {
+    fetch("https://api.themoviedb.org/3/genre/movie/list?language=en", {
       method: "GET",
       headers: {
         accept: "application/json",
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMWE4NzE1ZjNkMjAyODIxMDNhNDQ5NmVlMGY5YWM0ZCIsInN1YiI6IjY2M2Y3YWY0YWNmNDk4YWYzMGMxOWM4ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mf2xIlXEIZpUKLT_VRMBqk-kJQxFztvQqq5kQVdjGIg",
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMWE4NzE1ZjNkMjAyODIxMDNhNDQ5NmVlMGY5YWM0ZCIsInN1YiI6IjY2M2Y3YWY0YWNmNDk4YWYzMGMxOWM4ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mf2xIlXEIZpUKLT_VRMBqk-kJQxFztvQqq5kQVdjGIg", // Ваш API-ключ
       },
-    };
-
-    fetch("https://api.themoviedb.org/3/genre/movie/list?language=en", options)
-      .then((response) => response.json())
-      .then((response) => setGenres(response.genres))
-      .catch((err) => console.error(err));
+    })
+      .then((res) => res.json())
+      .then((data) => setGenres(data.genres))
+      .catch((err) => console.error("Error fetching genres:", err));
   }, []);
 
   return (
     <GenreSidebarContainer>
       <Logo>My Films</Logo>
-      <Header>
-        <Title>Genres</Title>
-        <CloseButton onClick={onClose}>
-          <img src={closeIcon} alt="Close" />
-        </CloseButton>
-      </Header>
+      <CloseButton onClick={onClose}>X</CloseButton>
       <GenreList>
         {genres.map((genre) => (
           <GenreItem key={genre.id} onClick={() => onSelectGenre(genre.id)}>
@@ -62,4 +52,4 @@ const GenreSidebarMovie: React.FC<GenreSidebarProps> = ({
   );
 };
 
-export default GenreSidebarMovie;
+export default GenreSidebar;

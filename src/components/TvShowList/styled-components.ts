@@ -84,7 +84,7 @@ export const LoaderContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+  height: 100vh;
 `;
 
 export const Loader = styled.img`
@@ -95,69 +95,40 @@ export const Loader = styled.img`
 export const PaginationContainer = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin: 20px 0;
+  padding: 20px;
+  gap: 5px;
 `;
 
 export const PaginationButton = styled.button`
-  background-color: #ffffff;
-  color: #000000;
-  border: 1px solid #dddddd;
-  border-radius: 4px;
+  background-color: #5398cd;
+  color: #fff;
+  border: none;
   padding: 10px 15px;
-  margin: 0 5px;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #f0f0f0;
+    background-color: #608bb6;
   }
 `;
 
 export const PaginationSpan = styled.span`
-  padding: 10px 15px;
+  background-color: transparent;
+  color: #000;
+  cursor: default;
 `;
 
 export const ActivePageButton = styled(PaginationButton)`
-  background-color: #000000;
-  color: #ffffff;
+  background-color: #5398cd !important;
 `;
 
 export const ToggleIcon = styled.img`
+  position: fixed;
+  top: 100px;
+  left: 5px;
   width: 40px;
   height: 40px;
   cursor: pointer;
-  margin: 20px 0;
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 2;
-
-  @media (min-width: 768px) {
-    display: none;
-  }
+  z-index: 1000;
 `;
-
-export const SidebarGenresContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #fff;
-  width: 80%;
-  padding: 20px;
-  position: absolute;
-  top: 50px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
-  @media (min-width: 768px) {
-    width: 300px;
-    position: relative;
-    top: 0;
-    left: 0;
-    transform: none;
-    box-shadow: none;
-  }
-`;
-

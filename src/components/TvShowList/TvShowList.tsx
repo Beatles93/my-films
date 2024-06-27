@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useFavoriteStore } from "../../store/store"; 
+import { useFavoriteStore } from "../../store/store";
 import loaderSvg from "../../assets/loader.svg";
 import toggleIcon from "../../assets/button-icon.png";
 import GenresSidebarTvShow from "../GenreSidebarTvShow/GenreSidebarTvShow";
@@ -28,10 +28,10 @@ const TvShowList: React.FC<TvShowListProps> = ({ query }) => {
   const [tvShows, setTvShows] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
+  const [selectedGenre, setSelectedGenre] = useState<number | null>(null); // убедитесь, что переменная определена и инициализирована
   const [showGenres, setShowGenres] = useState(false);
   const navigate = useNavigate();
-  const addToFavorites = useFavoriteStore((state) => state.addToFavorites); // Add to favorites function
+  const addToFavorites = useFavoriteStore((state) => state.addToFavorites);
 
   const fetchTvShows = (searchQuery = "", genre = null, page = 1) => {
     const options = {
@@ -39,7 +39,7 @@ const TvShowList: React.FC<TvShowListProps> = ({ query }) => {
       headers: {
         accept: "application/json",
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NDA0MjBiMjgxMTZhMDgxNGVhNTUzMGU4ZjQwZjEzOSIsInN1YiI6IjY0NzM1MGFmYTE5OWE2MDBhNzU2ODU2ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fxq55ORrjXazNcjjNk7EAeGNJptMMFX5xKq8stYrC4U",
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMWE4NzE1ZjNkMjAyODIxMDNhNDQ5NmVlMGY5YWM0ZCIsInN1YiI6IjY2M2Y3YWY0YWNmNDk4YWYzMGMxOWM4ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mf2xIlXEIZpUKLT_VRMBqk-kJQxFztvQqq5kQVdjGIg",
       },
     };
 
@@ -195,4 +195,4 @@ const TvShowList: React.FC<TvShowListProps> = ({ query }) => {
   );
 };
 
-export default TvShowList;  
+export default TvShowList;
