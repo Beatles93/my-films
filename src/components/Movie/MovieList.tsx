@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useFavoriteStore } from "../../store/store";
 import loaderSvg from "../../assets/loader.svg";
 import toggleIcon from "../../assets/button-icon.png";
+import GenreSidebar from "../GenreSidebarMovie/GenreSidebarMovie"; 
 import {
   PaginationButton,
   ActivePageButton,
@@ -36,7 +37,7 @@ const MovieList: React.FC<MovieListProps> = ({ query }) => {
   const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
   const [showGenres, setShowGenres] = useState(false);
   const navigate = useNavigate();
-  const addToFavorites = useFavoriteStore((state) => state.addToFavorites); 
+  const addToFavorites = useFavoriteStore((state) => state.addToFavorites);
 
   const handleClick = (id: number) => {
     navigate(`/movie/${id}`);

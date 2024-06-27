@@ -1,56 +1,46 @@
-import { useEffect, useState } from "react";
-import closeIcon from "../../assets/cross-icon.png";
-import {
-  GenreSidebarContainer,
-  Logo,
-  Header,
-  Title,
-  CloseButton,
-  GenreList,
-  GenreItem,
-} from "./styled-components";
+import React, { useEffect, useState } from "react";
+import { GenreSidebarContainer, Header, Logo, CloseButton, GenreList, GenreItem } from "./styled-components";
 
-interface GenreSidebarProps {
+interface GenresSidebarTvShowProps {
   onSelectGenre: (genreId: number) => void;
   onClose: () => void;
 }
 
-interface Genre {
-  id: number;
-  name: string;
-}
-
-const GenreSidebarTvShow: React.FC<GenreSidebarProps> = ({
+const GenresSidebarTvShow: React.FC<GenresSidebarTvShowProps> = ({
   onSelectGenre,
   onClose,
 }) => {
-  const [genres, setGenres] = useState<Genre[]>([]);
+  const [genres, setGenres] = useState([]);
 
   useEffect(() => {
-      const options = {
-        method: "GET",
-        headers: {
-          accept: "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMWE4NzE1ZjNkMjAyODIxMDNhNDQ5NmVlMGY5YWM0ZCIsInN1YiI6IjY2M2Y3YWY0YWNmNDk4YWYzMGMxOWM4ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mf2xIlXEIZpUKLT_VRMBqk-kJQxFztvQqq5kQVdjGIg",
-        },
-      };
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NDA0MjBiMjgxMTZhMDgxNGVhNTUzMGU4ZjQwZjEzOSIsInN1YiI6IjY0NzM1MGFmYTE5OWE2MDBhNzU2ODU2ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fxq55ORrjXazNcjjNk7EAeGNJptMMFX5xKq8stYrC4U",
+      },
+    };
 
     fetch("https://api.themoviedb.org/3/genre/tv/list?language=en", options)
-      .then((response) => response.json())
-      .then((response) => setGenres(response.genres))
-      .catch((err) => console.error(err));
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setGenres(data.genres || []);
+      })
+      .catch((error) => {
+        console.error("Error fetching genres:", error);
+      });
   }, []);
 
   return (
     <GenreSidebarContainer>
-      <Logo>My Shows</Logo>
-      <Header>
-        <Title>Genres</Title>
-        <CloseButton onClick={onClose}>
-          <img src={closeIcon} alt="Close" />
-        </CloseButton>
-      </Header>
+      <Logo>TV Show</Logo>
+        <CloseButton onClick={onClose}>X</CloseButton>
       <GenreList>
         {genres.map((genre) => (
           <GenreItem key={genre.id} onClick={() => onSelectGenre(genre.id)}>
@@ -62,4 +52,4 @@ const GenreSidebarTvShow: React.FC<GenreSidebarProps> = ({
   );
 };
 
-export default GenreSidebarTvShow;
+export default GenresSidebarTvShow;
