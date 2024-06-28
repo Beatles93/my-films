@@ -18,6 +18,7 @@ export const FavoriteItem = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
   cursor: pointer;
+  position: relative;
 
   &:hover {
     transform: translateY(-10px);
@@ -56,4 +57,38 @@ export const FavoritePoster = styled.img`
   object-fit: cover;
   border-radius: 12px;
 `;
+
+export const PaginationContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  gap: 5px;
+`;
+
+export const PaginationButton = styled.button`
+  background-color: #5398cd;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #608bb6;
+  }
+`;
+
+export const PaginationSpan = styled.span`
+  background-color: transparent;
+  color: #000;
+  cursor: default;
+`;
+
+export const ActivePageButton = styled(PaginationButton)`
+  background-color: #5398cd !important;
+`;
+
+
+
 

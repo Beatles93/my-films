@@ -28,10 +28,14 @@ const TvShowList: React.FC<TvShowListProps> = ({ query }) => {
   const [tvShows, setTvShows] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [selectedGenre, setSelectedGenre] = useState<number | null>(null); // убедитесь, что переменная определена и инициализирована
+  const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
   const [showGenres, setShowGenres] = useState(false);
   const navigate = useNavigate();
   const addToFavorites = useFavoriteStore((state) => state.addToFavorites);
+  const favorites = useFavoriteStore((state) => state.favorites);
+
+  // Создаем Set для хранения id избранных сериалов
+  const favoriteIds = new Set(favorites.map((tvShow) => tvShow.id));
 
   const fetchTvShows = (searchQuery = "", genre = null, page = 1) => {
     const options = {
@@ -80,7 +84,12 @@ const TvShowList: React.FC<TvShowListProps> = ({ query }) => {
   };
 
   const handleAddToFavorites = (tvShow) => {
-    addToFavorites(tvShow);
+    if (!favoriteIds.has(tvShow.id)) {
+      addToFavorites(tvShow);
+    } else {
+      console.log("Сериал уже добавлен в избранное.");
+      // Можно показать пользователю сообщение или выполнить другие действия
+    }
   };
 
   const handlePageChange = (page: number) => {
