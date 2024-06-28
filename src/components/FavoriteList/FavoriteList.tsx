@@ -1,32 +1,104 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { useFavoriteStore } from "../../store/store"; 
-import {
-  FavoritesContainer,
-  FavoriteItem,
-  FavoritePoster,
-} from "./styled-components";
+  import React, { useState } from "react";
+  import { useNavigate } from "react-router-dom";
+  import { useFavoriteStore } from "../../store/store";
+  import {
+    PaginationButton,
+    ActivePageButton,
+    PaginationSpan,
+    PaginationContainer,
+    FavoritesContainer,
+    FavoriteItem,
+    FavoritePoster,
+  } from "./styled-components";
 
-const FavoriteList: React.FC = () => {
-  const favorites = useFavoriteStore((state) => state.favorites); 
-  const navigate = useNavigate();
+  const ITEMS_PER_PAGE = 20; 
 
-  const handleClick = (id: number) => {
-    navigate(`/movie/${id}`);
+  const FavoriteList: React.FC = () => {
+    const favorites = useFavoriteStore((state) => state.favorites);
+    const [currentPage, setCurrentPage] = useState(1);
+    const navigate = useNavigate();
+
+    const totalPages = Math.ceil(favorites.length / ITEMS_PER_PAGE);
+
+    const handleClick = (id: number) => {
+      navigate(`/movie/${id}`);
+    };
+
+    const handlePageChange = (page: number) => {
+      if (page > 0 && page <= totalPages) {
+        setCurrentPage(page);
+      }
+    };
+
+    const renderPageButtons = () => {
+      let pageButtons = [];
+
+      if (currentPage > 1) {
+        pageButtons.push(
+          <PaginationButton
+            key="prev"
+            onClick={() => handlePageChange(currentPage - 1)}
+          >
+            Earlier
+          </PaginationButton>
+        );
+      }
+
+      for (let page = 1; page <= totalPages; page++) {
+        if (
+          page === 1 ||
+          page === totalPages ||
+          (page >= currentPage - 2 && page <= currentPage + 2)
+        ) {
+          pageButtons.push(
+            <PaginationButton
+              key={page}
+              onClick={() => handlePageChange(page)}
+              className={currentPage === page ? ActivePageButton : ""}
+            >
+              {page}
+            </PaginationButton>
+          );
+        } else if (page === currentPage - 3 || page === currentPage + 3) {
+          pageButtons.push(<PaginationSpan key={page}>...</PaginationSpan>);
+        }
+      }
+
+      if (currentPage < totalPages) {
+        pageButtons.push(
+          <PaginationButton
+            key="next"
+            onClick={() => handlePageChange(currentPage + 1)}
+          >
+            Later
+          </PaginationButton>
+        );
+      }
+
+      return pageButtons;
+    };
+
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = Math.min(startIndex + ITEMS_PER_PAGE, favorites.length);
+    const currentFavorites = favorites.slice(startIndex, endIndex);
+
+    return (
+      <>
+        <FavoritesContainer>
+          {currentFavorites.map((movie, index) => (
+            <FavoriteItem key={index} onClick={() => handleClick(movie.id)}>
+              <FavoritePoster
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                alt={movie.title}
+              />
+            </FavoriteItem>
+          ))}
+        </FavoritesContainer>
+        {totalPages > 1 && (
+          <PaginationContainer>{renderPageButtons()}</PaginationContainer>
+        )}
+      </>
+    );
   };
 
-  return (
-    <FavoritesContainer>
-      {favorites.map((movie) => (
-        <FavoriteItem key={movie.id} onClick={() => handleClick(movie.id)}>
-          <FavoritePoster
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-            alt={movie.title}
-          />
-        </FavoriteItem>
-      ))}
-    </FavoritesContainer>
-  );
-};
-
-export default FavoriteList;
+  export default FavoriteList;

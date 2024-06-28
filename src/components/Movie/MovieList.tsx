@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useFavoriteStore } from "../../store/store";
 import loaderSvg from "../../assets/loader.svg";
 import toggleIcon from "../../assets/button-icon.png";
-import GenreSidebar from "../GenreSidebarMovie/GenreSidebarMovie"; 
+import GenreSidebar from "../GenreSidebarMovie/GenreSidebarMovie";
 import {
   PaginationButton,
   ActivePageButton,
@@ -38,13 +38,26 @@ const MovieList: React.FC<MovieListProps> = ({ query }) => {
   const [showGenres, setShowGenres] = useState(false);
   const navigate = useNavigate();
   const addToFavorites = useFavoriteStore((state) => state.addToFavorites);
+  const favorites = useFavoriteStore((state) => state.favorites);
+  const [favoriteIds, setFavoriteIds] = useState(new Set<number>());
+
+  useEffect(() => {
+    const ids = new Set<number>(favorites.map((movie) => movie.id));
+    setFavoriteIds(ids);
+  }, [favorites]);
 
   const handleClick = (id: number) => {
     navigate(`/movie/${id}`);
   };
 
   const handleAddToFavorites = (movie: Movie) => {
-    addToFavorites(movie);
+    if (!favoriteIds.has(movie.id)) {
+      addToFavorites(movie);
+      setFavoriteIds((prevIds) => new Set(prevIds).add(movie.id));
+    } else {
+      console.log("Фильм уже добавлен в избранное.");
+      // Можно показать пользователю сообщение или выполнить другие действия
+    }
   };
 
   const getMovie = (query: string, page = 1) => {
