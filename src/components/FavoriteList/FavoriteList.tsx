@@ -82,9 +82,15 @@ const FavoriteList: React.FC = () => {
     return pageButtons;
   };
 
+  // Reverse the order of the favorites array
+  const reversedFavorites = [...favorites].reverse();
+
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const endIndex = Math.min(startIndex + ITEMS_PER_PAGE, favorites.length);
-  const currentFavorites = favorites.slice(startIndex, endIndex);
+  const endIndex = Math.min(
+    startIndex + ITEMS_PER_PAGE,
+    reversedFavorites.length
+  );
+  const currentFavorites = reversedFavorites.slice(startIndex, endIndex);
 
   return (
     <>
