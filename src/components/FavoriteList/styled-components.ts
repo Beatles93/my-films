@@ -89,6 +89,23 @@ export const ActivePageButton = styled(PaginationButton)`
   background-color: #5398cd !important;
 `;
 
+export const HeartIcon = styled.div`
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 1);
+  }
+`;
+
+
 
 
 
