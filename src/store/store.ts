@@ -1,15 +1,15 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
 
-interface Movie {
+interface FavoriteVideo {
   id: number;
   title: string;
   poster_path: string;
 }
 
 interface FavoriteStore {
-  favorites: Movie[];
-  addToFavorites: (movie: Movie) => void;
+  favorites: FavoriteVideo[];
+  addToFavorites: (movie: FavoriteVideo) => void;
   removeFromFavorites: (id: number) => void;
 }
 

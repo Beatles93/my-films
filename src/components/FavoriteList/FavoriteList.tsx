@@ -14,6 +14,12 @@ import {
 
 const ITEMS_PER_PAGE = 20;
 
+interface Movie {
+  id: number;
+  title: string;
+  poster_path: string;
+}
+
 const FavoriteList: React.FC = () => {
   const favorites = useFavoriteStore((state) => state.favorites);
   const removeFromFavorites = useFavoriteStore(
@@ -35,7 +41,7 @@ const FavoriteList: React.FC = () => {
   };
 
   const renderPageButtons = () => {
-    let pageButtons = [];
+    const pageButtons: JSX.Element[] = [];
 
     if (currentPage > 1) {
       pageButtons.push(
@@ -82,7 +88,6 @@ const FavoriteList: React.FC = () => {
     return pageButtons;
   };
 
-  // Reverse the order of the favorites array
   const reversedFavorites = [...favorites].reverse();
 
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -95,7 +100,7 @@ const FavoriteList: React.FC = () => {
   return (
     <>
       <FavoritesContainer>
-        {currentFavorites.map((movie, index) => (
+        {currentFavorites.map((movie: Movie, index: number) => (
           <FavoriteItem key={index}>
             <HeartIcon
               onClick={(e) => {

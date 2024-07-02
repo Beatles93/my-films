@@ -14,7 +14,7 @@ import {
   BackButton,
 } from "./styled-components";
 
-interface tvShow {
+interface TVShow {
   poster_path: string;
   original_name: string;
   first_air_date: string;
@@ -23,10 +23,10 @@ interface tvShow {
   vote_count: number;
 }
 
-const tvShowDetails: React.FC = () => {
+const TvShowDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [tvShowDetails, setTvShowDetails] = useState<tvShow | null>(null);
+  const [tvShowDetails, setTvShowDetails] = useState<TVShow | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -48,12 +48,12 @@ const tvShowDetails: React.FC = () => {
       options
     )
       .then((res) => res.json())
-      .then((data: tvShow) => {
+      .then((data: TVShow) => {
         setTvShowDetails(data);
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching serial details:", error);
+        console.error("Error fetching TV show details:", error);
         setLoading(false);
       });
   }, [id]);
@@ -67,7 +67,7 @@ const tvShowDetails: React.FC = () => {
   }
 
   if (!tvShowDetails) {
-    return <div>Error loading serial details</div>;
+    return <div>Error loading TV show details</div>;
   }
 
   return (
@@ -93,5 +93,4 @@ const tvShowDetails: React.FC = () => {
   );
 };
 
-export default tvShowDetails; 
-
+export default TvShowDetails;

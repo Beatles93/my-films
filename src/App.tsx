@@ -11,12 +11,7 @@ import Footer from "./components/Footer/Footer";
 import styles from "./App.module.scss";
 
 function App() {
-  const [query, setQuery] = useState("");
-  const [favorites, setFavorites] = useState([]);
-
-  const addToFavorites = (movie) => {
-    setFavorites((prevFavorites) => [...prevFavorites, movie]);
-  };
+  const [query, setQuery] = useState<string>("");
 
   return (
     <div className={styles.app}>
@@ -26,14 +21,14 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route
             path="/films"
-            element={<Films query={query} addToFavorites={addToFavorites} />}
+            element={<Films query={query}/>}
           />
           <Route path="/tvShow" element={<TvShow query={query} />} />
           <Route path="/series/:id" element={<TvShowDetails />} />
           <Route path="/movie/:id" element={<MovieDetails />} />
           <Route
             path="/favorites"
-            element={<FavoriteList favorites={favorites} />}
+            element={<FavoriteList/>}
           />
         </Routes>
         <Footer />

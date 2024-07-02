@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFavoriteStore } from "../../store/store";
 import loaderSvg from "../../assets/loader.svg";
@@ -19,13 +19,19 @@ import {
   ToggleIcon,
 } from "./styled-components";
 
+interface TvShow {
+  id: number;
+  name: string;
+  poster_path: string;
+}
+
 interface TvShowListProps {
   query: string;
 }
 
 const TvShowList: React.FC<TvShowListProps> = ({ query }) => {
   const [loading, setLoading] = useState(true);
-  const [tvShows, setTvShows] = useState([]);
+  const [tvShows, setTvShows] = useState<TvShow[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
@@ -34,10 +40,13 @@ const TvShowList: React.FC<TvShowListProps> = ({ query }) => {
   const addToFavorites = useFavoriteStore((state) => state.addToFavorites);
   const favorites = useFavoriteStore((state) => state.favorites);
 
-  // Создаем Set для хранения id избранных сериалов
   const favoriteIds = new Set(favorites.map((tvShow) => tvShow.id));
 
-  const fetchTvShows = (searchQuery = "", genre = null, page = 1) => {
+  const fetchTvShows = (
+    searchQuery = "",
+    genre: number | null = null,
+    page = 1
+  ) => {
     const options = {
       method: "GET",
       headers: {
@@ -51,7 +60,7 @@ const TvShowList: React.FC<TvShowListProps> = ({ query }) => {
 
     if (searchQuery) {
       url = `https://api.themoviedb.org/3/search/tv?query=${searchQuery}&include_adult=false&language=en-US&page=${page}`;
-    } else if (genre) {
+    } else if (genre !== null) {
       url = `https://api.themoviedb.org/3/discover/tv?with_genres=${genre}&include_adult=false&language=en-US&page=${page}&sort_by=popularity.desc`;
     }
 
@@ -83,9 +92,13 @@ const TvShowList: React.FC<TvShowListProps> = ({ query }) => {
     navigate(`/series/${id}`);
   };
 
-  const handleAddToFavorites = (tvShow) => {
+  const handleAddToFavorites = (tvShow: TvShow) => {
     if (!favoriteIds.has(tvShow.id)) {
-      addToFavorites(tvShow);
+      addToFavorites({
+        id: tvShow.id,
+        title: tvShow.name,
+        poster_path: tvShow.poster_path,
+      });
     } else {
       console.log("Сериал уже добавлен в избранное.");
       // Можно показать пользователю сообщение или выполнить другие действия
@@ -106,7 +119,7 @@ const TvShowList: React.FC<TvShowListProps> = ({ query }) => {
   };
 
   const renderPageButtons = () => {
-    let pageButtons = [];
+    const pageButtons: JSX.Element[] = [];
 
     if (currentPage > 1) {
       pageButtons.push(
@@ -173,7 +186,7 @@ const TvShowList: React.FC<TvShowListProps> = ({ query }) => {
       ) : (
         <ContainerTvShow>
           {tvShows.length > 0 ? (
-            tvShows.map((tvShow) => (
+            tvShows.map((tvShow: TvShow) => (
               <TvShowItem
                 key={tvShow.id}
                 onClick={() => handlePosterClick(tvShow.id)}

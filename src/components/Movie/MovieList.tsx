@@ -109,10 +109,11 @@ const MovieList: React.FC<MovieListProps> = ({ query }) => {
   useEffect(() => {
     setCurrentPage(1);
     getMovie(query);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query, selectedGenre]);
 
   const renderPageButtons = () => {
-    let pageButtons = [];
+    const pageButtons = [];
 
     if (currentPage > 1) {
       pageButtons.push(
