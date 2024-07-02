@@ -1,5 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { GenreSidebarContainer, Header, Logo, CloseButton, GenreList, GenreItem } from "./styled-components";
+import {
+  GenreSidebarContainer,
+  Logo,
+  CloseButton,
+  GenreList,
+  GenreItem,
+} from "./styled-components";
+
+interface Genre {
+  id: number;
+  name: string;
+}
 
 interface GenresSidebarTvShowProps {
   onSelectGenre: (genreId: number) => void;
@@ -10,7 +21,7 @@ const GenresSidebarTvShow: React.FC<GenresSidebarTvShowProps> = ({
   onSelectGenre,
   onClose,
 }) => {
-  const [genres, setGenres] = useState([]);
+  const [genres, setGenres] = useState<Genre[]>([]);
 
   useEffect(() => {
     const options = {
@@ -40,7 +51,7 @@ const GenresSidebarTvShow: React.FC<GenresSidebarTvShowProps> = ({
   return (
     <GenreSidebarContainer>
       <Logo>TV Show</Logo>
-        <CloseButton onClick={onClose}>X</CloseButton>
+      <CloseButton onClick={onClose}>X</CloseButton>
       <GenreList>
         {genres.map((genre) => (
           <GenreItem key={genre.id} onClick={() => onSelectGenre(genre.id)}>

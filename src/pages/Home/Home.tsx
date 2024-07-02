@@ -73,7 +73,6 @@ const TopRatedMovies = () => {
           {selectedMovie && <FeaturedMovie movie={selectedMovie} />}
           <Swiper
             slidesPerView={10}
-            slidesPerColumn={2}
             spaceBetween={20}
             navigation
             pagination={{ clickable: true }}
