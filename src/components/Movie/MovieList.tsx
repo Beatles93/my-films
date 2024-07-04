@@ -38,6 +38,9 @@ const MovieList: React.FC<MovieListProps> = ({ query }) => {
   const [showGenres, setShowGenres] = useState(false);
   const navigate = useNavigate();
   const addToFavorites = useFavoriteStore((state) => state.addToFavorites);
+  const removeFromFavorites = useFavoriteStore(
+    (state) => state.removeFromFavorites
+  );
   const favorites = useFavoriteStore((state) => state.favorites);
   const [favoriteIds, setFavoriteIds] = useState(new Set<number>());
 
@@ -53,10 +56,8 @@ const MovieList: React.FC<MovieListProps> = ({ query }) => {
   const handleAddToFavorites = (movie: Movie) => {
     if (!favoriteIds.has(movie.id)) {
       addToFavorites(movie);
-      setFavoriteIds((prevIds) => new Set(prevIds).add(movie.id));
     } else {
-      console.log("Фильм уже добавлен в избранное.");
-      // Можно показать пользователю сообщение или выполнить другие действия
+      removeFromFavorites(movie.id);
     }
   };
 
@@ -186,6 +187,7 @@ const MovieList: React.FC<MovieListProps> = ({ query }) => {
                   e.stopPropagation();
                   handleAddToFavorites(movie);
                 }}
+                isFavorite={favoriteIds.has(movie.id)}
               >
                 ❤️
               </HeartIcon>

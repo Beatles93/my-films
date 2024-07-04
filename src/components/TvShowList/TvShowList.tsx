@@ -18,11 +18,13 @@ import {
   ActivePageButton,
   ToggleIcon,
 } from "./styled-components";
+import TvShow from "../../pages/TvShow/TvShow";
 
 interface TvShow {
   id: number;
   name: string;
   poster_path: string;
+  title: string;
 }
 
 interface TvShowListProps {
@@ -38,9 +40,24 @@ const TvShowList: React.FC<TvShowListProps> = ({ query }) => {
   const [showGenres, setShowGenres] = useState(false);
   const navigate = useNavigate();
   const addToFavorites = useFavoriteStore((state) => state.addToFavorites);
+  const removeFromFavorites = useFavoriteStore(
+    (state) => state.removeFromFavorites
+  );
   const favorites = useFavoriteStore((state) => state.favorites);
+  const [favoriteIds, setFavoriteIds] = useState(new Set<number>());
 
-  const favoriteIds = new Set(favorites.map((tvShow) => tvShow.id));
+  useEffect(() => {
+    const ids = new Set<number>(favorites.map((tvShow) => tvShow.id));
+    setFavoriteIds(ids);
+  }, [favorites]);
+
+  const handleAddToFavorites = (tvShow: TvShow) => {
+    if (!favoriteIds.has(tvShow.id)) {
+      addToFavorites(tvShow);
+    } else {
+      removeFromFavorites(tvShow.id);
+    }
+  };
 
   const fetchTvShows = (
     searchQuery = "",
@@ -92,18 +109,7 @@ const TvShowList: React.FC<TvShowListProps> = ({ query }) => {
     navigate(`/series/${id}`);
   };
 
-  const handleAddToFavorites = (tvShow: TvShow) => {
-    if (!favoriteIds.has(tvShow.id)) {
-      addToFavorites({
-        id: tvShow.id,
-        title: tvShow.name,
-        poster_path: tvShow.poster_path,
-      });
-    } else {
-      console.log("Сериал уже добавлен в избранное.");
-      // Можно показать пользователю сообщение или выполнить другие действия
-    }
-  };
+
 
   const handlePageChange = (page: number) => {
     if (page > 0 && page <= totalPages) {
@@ -196,6 +202,7 @@ const TvShowList: React.FC<TvShowListProps> = ({ query }) => {
                     e.stopPropagation();
                     handleAddToFavorites(tvShow);
                   }}
+                  isFavorite={favoriteIds.has(tvShow.id)}
                 >
                   ❤️
                 </HeartIcon>
