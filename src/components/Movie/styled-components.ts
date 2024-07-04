@@ -64,11 +64,11 @@ export const MoviePoster = styled.img`
   border-radius: 12px;
 `;
 
-export const HeartIcon = styled.div`
+export const HeartIcon = styled.div<{ isFavorite: boolean }>`
   position: absolute;
   top: 10px;
   left: 10px;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: ${({ isFavorite }) => (isFavorite ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0.7)")};
   border-radius: 50%;
   padding: 5px;
   cursor: pointer;
