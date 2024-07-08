@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFavoriteStore } from "../../store/store";
 import {
@@ -22,16 +22,31 @@ interface Movie {
 
 const FavoriteList: React.FC = () => {
   const favorites = useFavoriteStore((state) => state.favorites);
+  const addToFavorites = useFavoriteStore((state) => state.addToFavorites);
   const removeFromFavorites = useFavoriteStore(
     (state) => state.removeFromFavorites
   );
+  const [favoriteIds, setFavoriteIds] = useState(new Set<number>());
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const ids = new Set<number>(favorites.map((movie) => movie.id));
+    setFavoriteIds(ids);
+  }, [favorites]);
 
   const totalPages = Math.ceil(favorites.length / ITEMS_PER_PAGE);
 
   const handleClick = (id: number) => {
     navigate(`/movie/${id}`);
+  };
+
+  const handleAddToFavorites = (movie: Movie) => {
+    if (!favoriteIds.has(movie.id)) {
+      addToFavorites(movie);
+    } else {
+      removeFromFavorites(movie.id);
+    }
   };
 
   const handlePageChange = (page: number) => {
@@ -105,8 +120,9 @@ const FavoriteList: React.FC = () => {
             <HeartIcon
               onClick={(e) => {
                 e.stopPropagation();
-                removeFromFavorites(movie.id);
+                handleAddToFavorites(movie);
               }}
+              isFavorite={favoriteIds.has(movie.id)}
             >
               ❤️
             </HeartIcon>
