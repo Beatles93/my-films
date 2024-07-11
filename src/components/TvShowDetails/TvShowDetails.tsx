@@ -28,6 +28,10 @@ const TvShowDetails: React.FC = () => {
   const navigate = useNavigate();
   const [tvShowDetails, setTvShowDetails] = useState<TVShow | null>(null);
   const [loading, setLoading] = useState(true);
+  const [userRating, setUserRating] = useState<number>(() => {
+    const savedRating = localStorage.getItem(`tv-rating-${id}`);
+    return savedRating ? parseInt(savedRating, 10) : 0;
+  });
 
   useEffect(() => {
     if (!id) {
@@ -58,6 +62,11 @@ const TvShowDetails: React.FC = () => {
       });
   }, [id]);
 
+  const handleRatingChange = (rating: number) => {
+    setUserRating(rating);
+    localStorage.setItem(`tv-rating-${id}`, rating.toString());
+  };
+
   if (loading) {
     return (
       <LoaderContainer>
@@ -80,10 +89,7 @@ const TvShowDetails: React.FC = () => {
       <Text>First Air Date: {tvShowDetails.first_air_date}</Text>
       <Text>{tvShowDetails.overview}</Text>
       <Votes>
-        <VoteCount>
-          <StarRating rating={tvShowDetails.vote_average / 2} />
-          {tvShowDetails.vote_average} / 10
-        </VoteCount>
+        <StarRating rating={userRating} onRate={handleRatingChange} />
         <VoteCount>
           <i className="fas fa-star"></i> {tvShowDetails.vote_count}
         </VoteCount>

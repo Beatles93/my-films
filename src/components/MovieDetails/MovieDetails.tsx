@@ -32,6 +32,10 @@ const MovieDetails: React.FC = () => {
   const navigate = useNavigate();
   const [movieDetails, setMovieDetails] = useState<Movie | null>(null);
   const [loading, setLoading] = useState(true);
+  const [userRating, setUserRating] = useState<number>(() => {
+    const savedRating = localStorage.getItem(`movie-rating-${id}`);
+    return savedRating ? parseInt(savedRating, 10) : 0;
+  });
 
   useEffect(() => {
     fetch(
@@ -47,6 +51,11 @@ const MovieDetails: React.FC = () => {
         setLoading(false);
       });
   }, [id]);
+
+  const handleRatingChange = (rating: number) => {
+    setUserRating(rating);
+    localStorage.setItem(`movie-rating-${id}`, rating.toString());
+  };
 
   if (loading) {
     return (
@@ -70,7 +79,7 @@ const MovieDetails: React.FC = () => {
       <Text>Release Date: {movieDetails.release_date}</Text>
       <Text>{movieDetails.overview}</Text>
       <Votes>
-        <StarRating rating={movieDetails.vote_average / 2} />
+        <StarRating rating={userRating} onRate={handleRatingChange} />
         <VoteCount>
           <i className="fas fa-star"></i> {movieDetails.vote_count}
         </VoteCount>
